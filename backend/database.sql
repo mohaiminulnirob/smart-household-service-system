@@ -71,3 +71,7 @@ ALTER TABLE workers
 ALTER TABLE service_requests 
   ADD COLUMN latitude DECIMAL(10,7) NULL,
   ADD COLUMN longitude DECIMAL(10,7) NULL;
+  
+ALTER TABLE users
+  ADD COLUMN latitude DECIMAL(10,7) NULL,
+  ADD COLUMN longitude DECIMAL(10,7) NULL;

@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoutes.js";
 import ratingRoutes from "./routes/ratingRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import workerRoutes from "./routes/workerRoutes.js";
+import mapRoutes from "./routes/mapRoutes.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/requests", serviceRoutes);
 app.use("/api/ratings", ratingRoutes);
 app.use("/api/workers", workerRoutes);
+app.use("/api/maps", mapRoutes);
 app.use(errorHandler);
 
 // Root route

@@ -1,11 +1,10 @@
 // utils/responseHelper.js
 
 // Successful response
-export const responseSuccess = (res, data = null, message = "Success", status = 200) => {
+export const responseSuccess = (res, message = "Success", status = 200) => {
   res.status(status).json({
     status: "success",
     message,
-    data,
   });
 };
 
