@@ -7,3 +7,6 @@
 {"level":"info","message":"Database connected successfully","timestamp":"2025-11-13T23:10:05.853Z"}
 {"level":"info","message":"SMTP transporter ready","timestamp":"2025-11-13T23:10:07.657Z"}
 {"body":{"email":"sajib@example.com","password":"sajib123"},"level":"info","message":"Incoming API Request","method":"POST","query":{},"route":"/api/auth/login","status":200,"timestamp":"2025-11-13T23:10:16.400Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-11-13T23:23:13.902Z"}
+{"level":"info","message":"Database connected successfully","timestamp":"2025-11-13T23:23:13.976Z"}
+{"level":"info","message":"SMTP transporter ready","timestamp":"2025-11-13T23:23:16.255Z"}
