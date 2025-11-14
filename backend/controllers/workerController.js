@@ -1,7 +1,7 @@
 import { query } from "../config/db.js";
 import { error, success } from "../utils/responseHelper.js";
 
-// Example: GET /api/workers/5?lat=23.7806&lng=90.2794
+// GET worker profile
 export const getWorkerProfile = async (req, res) => {
   try {
     const { id } = req.params;
@@ -31,7 +31,7 @@ export const getWorkerProfile = async (req, res) => {
   }
 };
 
-// Update worker availability
+// Update worker availability (manual override)
 export const updateAvailability = async (req, res) => {
   try {
     const { id } = req.params;
@@ -51,7 +51,7 @@ export const updateAvailability = async (req, res) => {
   }
 };
 
-// Get assigned service requests
+// Get assigned requests for a worker
 export const getWorkerRequests = async (req, res) => {
   try {
     const { id } = req.params;
@@ -90,7 +90,7 @@ export const getWorkerRatings = async (req, res) => {
   }
 };
 
-//Update worker location (latitude, longitude)
+// Update worker location
 export const updateWorkerLocation = async (req, res) => {
   try {
     const { id } = req.params;
