@@ -69,6 +69,7 @@ CREATE TABLE blacklisted_tokens (
   token VARCHAR(500) NOT NULL,
   user_id INT NULL,
   worker_id INT NULL,
+  expires_at DATETIME NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -338,7 +338,7 @@ export const logout = async (req, res) => {
     const decoded = jwt.decode(token);
 
     await query(
-      "INSERT INTO token_blacklist (token, expires_at) VALUES (?, FROM_UNIXTIME(?))",
+      "INSERT INTO blacklisted_tokens (token, expires_at) VALUES (?, FROM_UNIXTIME(?))",
       [token, decoded.exp]
     );
 

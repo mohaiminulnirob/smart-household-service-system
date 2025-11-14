@@ -33,7 +33,7 @@ app.use("/api/ratings", ratingRoutes);
 app.use("/api/workers", workerRoutes);
 
 // Root route
-app.get("/", (req, res) => res.send("FixMate Backend Running"));
+app.get("/", (req, res) => res.send({ success: true, message: "Backend is working" }));
 
 // Place error handler LAST
 app.use(errorHandler);
