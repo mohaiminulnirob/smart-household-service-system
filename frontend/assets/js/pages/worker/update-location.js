@@ -2,9 +2,11 @@ import { apiFetch } from "../../utils/api-client.js";
 import { ENDPOINTS } from "../../config/api.js";
 import { toast } from "../../utils/toast.js";
 import { requireAuth } from "../../utils/auth.js";
+import { getUser } from "../../utils/storage.js";
 
 requireAuth("worker");
 
+const worker = getUser(); // logged in worker
 const form = document.getElementById("locForm");
 const gpsBtn = document.getElementById("gpsBtn");
 const message = document.getElementById("message");
@@ -41,12 +43,12 @@ form.addEventListener("submit", async (e) => {
   const longitude = form.longitude.value.trim();
 
   try {
-    await apiFetch(ENDPOINTS.WORKERS.UPDATE_LOCATION, {
+    await apiFetch(ENDPOINTS.WORKERS.UPDATE_LOCATION(worker.id), {
       method: "PUT",
       body: { latitude, longitude }
     });
 
-    toast.success("Location updated");
+    toast.success("Location updated!");
     message.textContent = "Updated successfully!";
   } catch (err) {
     toast.error(err.message);

@@ -163,11 +163,11 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
-.gradient-text {
+ .gradient-text {
   background: linear-gradient(135deg, var(--primary), var(--primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
+} 
 
 .hero-subtitle {
   font-size: 1.25rem;
