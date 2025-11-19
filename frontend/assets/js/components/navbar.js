@@ -62,33 +62,27 @@ export function renderNavbarInto(targetId = 'navbar-dynamic') {
   } else {
     // Logged in → role-based navbar items
     if (user.role === 'user') {
+      right.appendChild(createLink('/pages/aboutUs.html', 'About Us'));
       right.appendChild(createLink('/pages/user/dashboard.html', 'Dashboard'));
-      right.appendChild(createLink('/pages/user/my-requests.html', 'My Requests'));
-      right.appendChild(createLink('/pages/user/create-request.html', 'Create Request'));
-      right.appendChild(createLink('/pages/user/profile.html', 'Profile'));
     }
 
     if (user.role === 'worker') {
+      right.appendChild(createLink('/pages/aboutUs.html', 'About Us'));
       right.appendChild(createLink('/pages/worker/dashboard.html', 'Dashboard'));
-      right.appendChild(createLink('/pages/worker/my-requests.html', 'My Jobs'));
-      right.appendChild(createLink('/pages/worker/ratings.html', 'Ratings'));
-      right.appendChild(createLink('/pages/worker/profile.html', 'Profile'));
     }
 
    if (user.role === 'admin') {
+    right.appendChild(createLink('/pages/aboutUs.html', 'About Us'));
     right.appendChild(createLink('/pages/admin/dashboard.html', 'Admin'));
-    right.appendChild(createLink('/pages/admin/pending-workers.html', 'Pending Workers'));
-    right.appendChild(createLink('/pages/admin/work-requests.html', 'Work Requests'));
-    right.appendChild(createLink('/pages/admin/profile.html', 'Profile'));
   }
 
-    // Profile label
-    const profile = document.createElement('span');
-    profile.textContent = user.name || user.email || 'Profile';
-    profile.style.marginLeft = '8px';
-    profile.style.fontSize = '14px';
-    profile.style.color = 'var(--text-secondary)';
-    right.appendChild(profile);
+    // // Profile label
+    // const profile = document.createElement('span');
+    // profile.textContent = user.name || user.email || 'Profile';
+    // profile.style.marginLeft = '8px';
+    // profile.style.fontSize = '14px';
+    // profile.style.color = 'var(--text-secondary)';
+    // right.appendChild(profile);
 
     // Logout button
     const logout = document.createElement('button');

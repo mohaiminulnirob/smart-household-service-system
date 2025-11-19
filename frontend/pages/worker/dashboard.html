@@ -11,8 +11,23 @@
     <div id="navbar-dynamic"></div>
 
     <main class="container" style="padding: 2rem; max-width: 900px">
-      <h2>Welcome Worker 👷</h2>
-      <p style="color: var(--muted)">Manage your assigned service requests.</p>
+       <!-- PROFILE HEADER SECTION -->
+      <div class="profile-header">
+        
+        <!-- Left: Profile Picture -->
+        <div class="profile-header-img">
+          <img id="dashProfileImg"
+              src="/assets/img/default-avatar.png"
+              alt="Profile Picture" />
+        </div>
+
+        <!-- Right: Greeting Text -->
+        <div class="profile-header-text">
+          <h2>Hello, <span id="dashUserName">Worker</span> 👋</h2>
+          <p>Manage your assigned service requests.</p>
+        </div>
+
+      </div>
 
       <!-- ACTION BUTTONS -->
       <div style="margin-top: 2rem; display: flex; gap: 20px; flex-wrap: wrap">
@@ -24,14 +39,14 @@
           ⭐ My Ratings
         </a>
 
-        <a href="/pages/worker/update-location.html" class="btn btn-secondary">
-          📍 Update Location
-        </a>
-
         <a href="/pages/worker/profile.html" class="btn btn-secondary">
           👤 Profile
         </a>
 
+        <a href="/pages/worker/update-location.html" class="btn btn-secondary">
+          📍 Update Location
+        </a>
+        
         <button id="openAvailabilityForm" class="btn btn-secondary">
           ⚡ Update Availability
         </button>

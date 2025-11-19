@@ -8,7 +8,28 @@ requireAuth('user');
 const user = currentUser();
 const userId = user.id;
 
+// Dashboard DOM
+const profileImgEl = document.getElementById("dashProfileImg");
+const userNameEl = document.getElementById("dashUserName");
 const recentContainer = document.getElementById("recentRequests");
+
+// Load dashboard top info
+async function loadUserInfo() {
+  try {
+    const res = await apiFetch(`/users/profile/${userId}`);
+    const data = res.data;
+
+    userNameEl.textContent = data.name || "User";
+
+    if (data.profilePic) {
+      profileImgEl.src = data.profilePic; // Base64 from backend
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+loadUserInfo();
 
 async function loadRecent() {
   try {

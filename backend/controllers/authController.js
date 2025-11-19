@@ -13,9 +13,9 @@ const SALT = 10;
 // Register User
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, phone, password } = req.body;
 
-    if (!name || !email || !password)
+    if (!name || !email || !phone || !password)
       return res.status(400).json(error("All fields required"));
 
     const [existing] = await query("SELECT * FROM users WHERE email = ?", [email]);
@@ -24,8 +24,8 @@ export const registerUser = async (req, res) => {
 
     const hashed = await bcrypt.hash(password, SALT);
     const [result] = await query(
-      "INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, 'user')",
-      [name, email, hashed]
+      "INSERT INTO users (name, email, phone, password_hash, role) VALUES (?, ?, ?, ?, 'user')",
+      [name, email, phone, hashed]
     );
 
     // create verification token
@@ -56,9 +56,9 @@ export const registerUser = async (req, res) => {
 // Register Worker
 export const registerWorker = async (req, res) => {
   try {
-    const { name, email, password, skill_category, location, latitude, longitude } = req.body;
+    const { name, email, phone, password, skill_category, location, latitude, longitude } = req.body;
 
-    if (!name || !email || !password || !skill_category)
+    if (!name || !email || !phone || !password || !skill_category)
       return res.status(400).json(error("All fields required"));
 
     const [existing] = await query("SELECT * FROM workers WHERE email = ?", [email]);
@@ -68,9 +68,9 @@ export const registerWorker = async (req, res) => {
     const hashed = await bcrypt.hash(password, SALT);
     const [result] = await query(
       `INSERT INTO workers 
-        (name, email, password_hash, skill_category, location, availability, latitude, longitude)
-       VALUES (?, ?, ?, ?, ?, 'Offline', ?, ?)`,
-      [name, email, hashed, skill_category, location, latitude, longitude]
+        (name, email, phone, password_hash, skill_category, location, availability, latitude, longitude)
+       VALUES (?, ?, ?, ?, ?, ?, 'Offline', ?, ?)`,
+      [name, email, phone, hashed, skill_category, location, latitude, longitude]
     );
 
     // verification token

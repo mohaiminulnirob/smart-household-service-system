@@ -23,6 +23,7 @@ form.addEventListener('submit', async (e) => {
 
   const name = form.name.value.trim();
   const email = form.email.value.trim();
+  const phone = form.phone.value.trim();
   const password = form.password.value;
 
   if (!isRequired(name)) {
@@ -33,15 +34,24 @@ form.addEventListener('submit', async (e) => {
     showError(form.email, 'Invalid email');
     return;
   }
+  if (!isRequired(phone)) {
+  showError(form.phone, "Phone number is required");
+  return;
+  }
+  if (phone.length < 11) {
+    showError(form.phone, "Phone number must be at least 10 digits");
+    return;
+  }
   if (!minLength(password, 6)) {
     showError(form.password, 'Password must be at least 6 characters');
     return;
   }
 
+
   try {
     const res = await apiFetch(ENDPOINTS.AUTH.REGISTER_USER, {
       method: 'POST',
-      body: { name, email, password },
+      body: { name, email, phone, password },
       timeout: 15000,
     });
 

@@ -11,6 +11,29 @@ requireAuth("worker");
 const worker = currentUser();
 const workerId = worker.id;
 
+// Dashboard DOM
+const profileImgEl = document.getElementById("dashProfileImg");
+const userNameEl = document.getElementById("dashUserName");
+
+// Load dashboard top info
+async function loadWorkerInfo() {
+  try {
+    const res = await apiFetch(`/workers/profile/${workerId}`);
+    const data = res.data;
+
+    userNameEl.textContent = data.name || "Worker";
+
+    if (data.profilePic) {
+      profileImgEl.src = data.profilePic; // Base64 from backend
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+loadWorkerInfo();
+
+
 const container = document.getElementById("recentRequests");
 
 /* -------------------- LOAD RECENT REQUESTS -------------------- */
