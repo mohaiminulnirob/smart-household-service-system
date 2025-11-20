@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Admin Dashboard - FixMate</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="/assets/css/global.css" />
-  </head>
-  <body>
-    <div id="navbar-dynamic"></div>
 
-    <main class="container" style="padding: 2rem; max-width: 900px">
-      <h2>Admin Dashboard</h2>
-      <p style="color: var(--muted)">Manage workers and system status.</p>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Dashboard - FixMate</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/assets/css/global.css" />
+</head>
 
-      <section style="margin-top: 2rem">
-        <a href="/pages/admin/pending-workers.html" class="btn btn-primary">
-          Pending Workers Approval
-        </a>
-        <a href="/pages/admin/work-requests.html" class="btn btn-secondary" style="margin-left:1rem">
-          Work Requests
-        </a>
-        <a href="/pages/admin/profile.html" class="btn btn-secondary" style="margin-left:1rem">
-          Update Profile
-        </a>
-      </section>
+<body>
+  <div id="navbar-dynamic"></div>
 
-      <section style="margin-top: 2rem">
-        <h3>System Summary</h3>
-        <div id="summary"></div>
-      </section>
-    </main>
+  <main class="container" style="padding: 2rem; max-width: 900px">
+    <h2>Admin Dashboard</h2>
+    <p style="color: var(--muted)">Manage workers and system status.</p>
+    <section style="margin-top: 2rem">
+      <a href="/pages/admin/pending-workers.html" class="btn btn-primary">
+        Pending Workers Approval
+      </a>
+      <a href="/pages/admin/work-requests.html" class="btn btn-secondary" style="margin-left:1rem">
+        Work Requests
+      </a>
+      <a href="/pages/admin/profile.html" class="btn btn-secondary" style="margin-left:1rem">
+        Update Profile
+      </a>
+    </section>
 
-    <script type="module" src="/assets/js/pages/admin/dashboard.js"></script>
-    <script type="module">
-      import { renderNavbarInto } from "/assets/js/components/navbar.js";
-      renderNavbarInto("navbar-dynamic");
-    </script>
-  </body>
+    <section style="margin-top: 2rem">
+      <h3>System Summary</h3>
+      <div id="summary"></div>
+    </section>
+  </main>
+
+  <script type="module" src="/assets/js/pages/admin/dashboard.js"></script>
+  <script type="module">
+    import { renderNavbarInto } from "/assets/js/components/navbar.js";
+    renderNavbarInto("navbar-dynamic");
+  </script>
+</body>
+
 </html>
