@@ -1,31 +1,28 @@
+import { createAdminRequestCard } from "../../components/adminRequestCard.js";
 import { ENDPOINTS } from "../../config/api.js";
 import { apiFetch } from "../../utils/api-client.js";
 import { requireAuth } from "../../utils/auth.js";
 
 requireAuth("admin");
 
-const container = document.getElementById("workRequests");
+const container = document.getElementById("requestsContainer");
 const sortSelect = document.getElementById("sortSelect");
 const filterSelect = document.getElementById("filterSelect");
 
-let allRequests = []; // store full list
+let allRequests = [];
 
 async function loadRequests() {
   container.innerHTML = "<p>Loading...</p>";
 
   try {
     const res = await apiFetch(ENDPOINTS.ADMIN.WORK_REQUESTS);
-    allRequests = Array.isArray(res?.data) ? res.data : [];
 
-    if (!allRequests.length) {
-      container.innerHTML = "<p>No work requests found.</p>";
-      return;
-    }
+    allRequests = Array.isArray(res.data) ? res.data : [];
 
     renderRequests();
 
   } catch (err) {
-    container.innerHTML = `<p style="color:var(--error)">${err.message || "Failed to load requests"}</p>`;
+    container.innerHTML = `<p style="color:red">${err.message}</p>`;
   }
 }
 
@@ -33,45 +30,59 @@ function renderRequests() {
   let list = [...allRequests];
 
   // Filtering
-  const filterVal = filterSelect.value;
-  if (filterVal !== "all") {
-    list = list.filter(r => r.status === filterVal);
+  const filter = filterSelect.value;
+  if (filter !== "all") {
+    list = list.filter((r) => r.status === filter);
   }
 
   // Sorting
-  const sortVal = sortSelect.value;
+  const sort = sortSelect.value;
   list.sort((a, b) => {
     const da = new Date(a.created_at);
     const db = new Date(b.created_at);
-
-    if (sortVal === "newest") return db - da;
-    return da - db; // oldest
+    return sort === "asc" ? da - db : db - da;
   });
 
-  // Render
+  if (!list.length) {
+    container.innerHTML = "<p>No requests found.</p>";
+    return;
+  }
+
   container.innerHTML = "";
-
-  list.forEach(r => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style.padding = "12px";
-    card.style.marginBottom = "12px";
-
-    card.innerHTML = `
-      <h4>${r.category} - <span class="status">${r.status}</span></h4>
-      <p><b>User:</b> ${r.user_name}</p>
-      <p><b>Description:</b> ${r.description}</p>
-      <p><b>Location:</b> ${r.location || "N/A"}</p>
-      <p><b>Assigned Worker ID:</b> ${r.assigned_worker_id || "Not assigned"}</p>
-      <p style="font-size:13px;color:var(--muted)">⏱ ${new Date(r.created_at).toLocaleString()}</p>
-    `;
-
-    container.appendChild(card);
-  });
+  list.forEach((r) => container.appendChild(createAdminRequestCard(r)));
 }
 
-// EVENT LISTENERS
 sortSelect.addEventListener("change", renderRequests);
 filterSelect.addEventListener("change", renderRequests);
 
 loadRequests();
+/* --------------------- SEARCH FEATURE --------------------- */
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+  const type = document.getElementById("searchType").value;
+  const value = document.getElementById("searchInput").value.trim();
+
+  if (!value) {
+    alert("Please enter an ID to search.");
+    return;
+  }
+
+  // Convert to number for accurate matching
+  const numValue = Number(value);
+
+  const results = allRequests.filter((r) => Number(r[type]) === numValue);
+
+  if (!results.length) {
+    container.innerHTML = `<p>No results found for ${type}: ${value}</p>`;
+    return;
+  }
+
+  container.innerHTML = "";
+  results.forEach((r) => container.appendChild(createAdminRequestCard(r)));
+});
+
+// RESET SEARCH
+document.getElementById("resetBtn").addEventListener("click", () => {
+  document.getElementById("searchInput").value = "";
+  renderRequests(); // reload full list using your existing function
+});

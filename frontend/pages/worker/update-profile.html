@@ -5,39 +5,86 @@
     <title>Update Worker Profile - FixMate</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
+
+    <style>
+      .auth-container {
+        max-width: 380px;
+        margin: 8rem auto;
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .auth-container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .auth-container p {
+        color: var(--text-muted);
+        margin-bottom: 1.2rem;
+      }
+
+      .auth-container label {
+        display: block;
+        text-align: left;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+        color: var(--text-secondary);
+      }
+
+      .auth-container input {
+        width: 100%;
+        padding: 12px;
+        border-radius: var(--radius);
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        color: var(--text);
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+
+      .auth-container .btn.btn-primary {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+      }
+    </style>
   </head>
 
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="max-width: 500px; padding: 2rem">
+    <div class="auth-container">
       <h2>Update Profile</h2>
+      <p>Edit your personal details.</p>
 
       <form id="updateForm">
-        <label>Name</label>
-        <input type="text" id="name" class="form-control" required />
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter name" required />
 
-        <label>Phone</label>
-        <input type="text" id="phone" class="form-control" />
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" placeholder="01XXXXXXXXX" required />
 
-        <label>Skill Category</label>
-        <select id="skill_category" class="form-control" required>
-          <option value="">Select Category</option>
-        </select>
+        <label for="profilePic">Profile Picture</label>
+        <input type="file" id="profilePic" accept="image/*" />
 
-        <label>Profile Picture</label>
-        <input type="file" id="profilePic" class="form-control" />
-
-        <button id="saveBtn" class="btn btn-primary" style="margin-top: 15px">
-          Save Changes
-        </button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
       </form>
-    </main>
+
+      <p style="margin-top: 1rem">
+        <a href="/pages/worker/profile.html">Back to Profile</a>
+      </p>
+    </div>
 
     <script
       type="module"
       src="/assets/js/pages/worker/update-profile.js"
     ></script>
+
     <script type="module">
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();

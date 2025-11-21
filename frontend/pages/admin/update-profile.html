@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Forgot Password - FixMate</title>
+    <title>Edit Admin Profile - FixMate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
 
     <style>
@@ -24,6 +25,14 @@
       .auth-container p {
         color: var(--text-muted);
         margin-bottom: 1.2rem;
+      }
+
+      .auth-container label {
+        display: block;
+        text-align: left;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+        color: var(--text-secondary);
       }
 
       .auth-container input {
@@ -50,33 +59,31 @@
     <div id="navbar-dynamic"></div>
 
     <div class="auth-container">
-      <h2>Forgot Password</h2>
-      <p>Enter your email to receive a password reset link.</p>
+      <h2>Edit Profile</h2>
+      <p>Update your admin information.</p>
 
-      <form id="forgotForm">
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          required
-        />
+      <form id="profileForm">
+        <label>Name</label>
+        <input type="text" id="name" required />
 
-        <button type="submit" class="btn btn-primary">Send Reset Link</button>
+        <label>Phone</label>
+        <input type="text" id="phone" required />
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
       </form>
 
       <p style="margin-top: 1rem">
-        <a href="/pages/auth/login.html">Back to Login</a>
+        <a href="javascript:history.back()">⬅ Back</a>
       </p>
     </div>
 
+    <script
+      type="module"
+      src="/assets/js/pages/admin/update-profile.js"
+    ></script>
     <script type="module">
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();
     </script>
-
-    <script
-      type="module"
-      src="/assets/js/pages/auth/forgot-password.js"
-    ></script>
   </body>
 </html>

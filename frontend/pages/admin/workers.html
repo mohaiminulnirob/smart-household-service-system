@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Admin Workers - FixMate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/assets/css/global.css" />
+  </head>
+
+  <body>
+    <div id="navbar-dynamic"></div>
+
+    <!-- Admin Navigation Buttons -->
+    <section
+      style="
+        margin-top: 2rem;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      "
+    >
+      <a href="/pages/admin/workers.html" class="btn btn-secondary">Workers</a>
+      <a href="/pages/admin/work-requests.html" class="btn btn-secondary"
+        >Service Requests</a
+      >
+      <a href="/pages/admin/update-profile.html" class="btn btn-secondary"
+        >Update Profile</a
+      >
+      <a href="/pages/auth/change-password.html" class="btn btn-secondary"
+        >Change Password</a
+      >
+    </section>
+
+    <main class="container" style="padding: 2rem; max-width: 900px">
+      <h2>All Workers</h2>
+      <p style="color: var(--muted)">Manage all registered workers.</p>
+
+      <!-- Sorting + Filter -->
+      <div style="margin: 1rem 0; display: flex; gap: 12px; flex-wrap: wrap">
+        <select id="sortSelect" class="form-control" style="max-width: 180px">
+          <option value="asc">Oldest First</option>
+          <option value="desc">Newest First</option>
+        </select>
+
+        <select id="skillSelect" class="form-control" style="max-width: 200px">
+          <option value="all">All Skill Categories</option>
+          <option value="Plumbing">Plumbing</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Cleaning">Cleaning</option>
+          <option value="AC Repair">AC Repair</option>
+          <option value="Painting">Painting</option>
+        </select>
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div style="margin: 1rem 0; display: flex; gap: 12px; flex-wrap: wrap">
+        <input
+          type="number"
+          id="searchInput"
+          class="form-control"
+          placeholder="Search by Worker ID..."
+          style="max-width: 200px"
+        />
+
+        <button id="searchBtn" class="btn btn-primary">Search</button>
+        <button id="resetBtn" class="btn btn-secondary">Reset</button>
+      </div>
+
+      <div id="workersContainer" style="margin-top: 1.5rem"></div>
+    </main>
+
+    <script type="module" src="/assets/js/pages/admin/workers.js"></script>
+    <script type="module">
+      import { renderNavbarInto } from "/assets/js/components/navbar.js";
+      renderNavbarInto("navbar-dynamic");
+    </script>
+  </body>
+</html>

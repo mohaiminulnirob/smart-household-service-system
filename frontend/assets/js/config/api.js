@@ -23,6 +23,9 @@ export const ENDPOINTS = {
     WORK_REQUESTS: '/admin/work-requests',
     GET_PROFILE: '/admin/profile',
     UPDATE_PROFILE: '/admin/profile/update',
+    ALL_WORKERS: '/admin/workers/all',
+    DASHBOARD_STATS: '/admin/dashboard/stats',
+
   },
   WORKERS: {
     GET_PROFILE: (id) => `/workers/profile/${id}`,
@@ -41,6 +44,7 @@ export const ENDPOINTS = {
     ACCEPT: (id) => `/requests/${id}/accept`,
     REJECT: (id) => `/requests/${id}/reject`,
     CANCEL: (id) => `/requests/${id}/cancel`,
+    STATS: '/requests/dashboard/stats',
   },
   RATINGS: {
     ADD: '/ratings',

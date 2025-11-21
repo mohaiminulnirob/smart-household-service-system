@@ -5,49 +5,112 @@
     <title>User Profile - FixMate</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
+
+    <style>
+      .profile-container {
+        max-width: 450px;
+        margin: 6rem auto;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        padding: 2rem 2.2rem;
+        border-radius: var(--radius);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        text-align: center;
+      }
+
+      .profile-container h2 {
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+      }
+
+      .profile-field {
+        text-align: left;
+        margin: 0.4rem 0;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+      }
+
+      .profile-field b {
+        color: var(--primary-dark);
+      }
+
+      .action-btn {
+        width: 100%;
+        margin-top: 15px;
+        padding: 12px;
+        font-size: 1.1rem;
+      }
+    </style>
   </head>
 
   <body>
     <div id="navbar-dynamic"></div>
-
-    <main class="container" style="max-width: 500px; padding: 2rem">
-      <h2>My Profile</h2>
-
-      <!-- Profile Image -->
-      <div style="text-align: center; margin-bottom: 20px">
-        <img
-          id="profileImg"
-          src="/assets/img/default-avatar.png"
-          class="clickable-profile-img"
-          style="
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-          "
-        />
-      </div>
-
-      <!-- Fullscreen Modal -->
-      <div id="imgModal" class="img-modal">
-        <span id="imgModalClose" class="img-modal-close">&times;</span>
-        <img id="imgModalContent" />
-      </div>
-
-      <div class="card" style="padding: 20px">
-        <p><b>Name:</b> <span id="name"></span></p>
-        <p><b>Email:</b> <span id="email"></span></p>
-      </div>
-
-      <button
-        id="updateBtn"
-        class="btn btn-primary"
-        style="margin-top: 20px; width: 100%"
+    <div
+      style="
+        margin-top: 2rem;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      "
+    >
+      <a href="/pages/user/create-request.html" class="btn btn-secondary"
+        >➕ Create Service Request</a
       >
+      <a href="/pages/user/my-requests.html" class="btn btn-secondary"
+        >📄 My Requests</a
+      >
+      <a href="/pages/user/profile.html" class="btn btn-secondary"
+        >👤 Profile</a
+      >
+      <a href="/pages/auth/change-password.html" class="btn btn-secondary"
+        >🔑 Change Password</a
+      >
+    </div>
+    <div class="profile-container">
+      <img
+        id="profileImg"
+        src="../../assets/images/default-avatar.png"
+        class="clickable-profile-img"
+        style="
+          width: 140px;
+          height: 140px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 3px solid var(--primary);
+          cursor: pointer;
+        "
+      />
+
+      <h2 style="margin-top: 15px">My Profile</h2>
+      <p style="color: var(--muted); margin-bottom: 1.5rem">
+        View your details and manage your account.
+      </p>
+
+      <div class="profile-field"><b>Name:</b> <span id="name"></span></div>
+
+      <div class="profile-field"><b>Email:</b> <span id="email"></span></div>
+
+      <div class="profile-field"><b>Account ID:</b> <span id="uid"></span></div>
+
+      <div class="profile-field"><b>Phone:</b> <span id="phone"></span></div>
+
+      <div class="profile-field">
+        <b>Account Created:</b> <span id="created_at"></span>
+      </div>
+
+      <button id="updateBtn" class="btn btn-primary action-btn">
         Update Profile
       </button>
-    </main>
+    </div>
+
+    <!-- Image Viewer Modal -->
+    <div id="imgModal" class="img-modal">
+      <span id="imgModalClose" class="img-modal-close">&times;</span>
+      <img id="imgModalContent" />
+    </div>
 
     <script type="module" src="/assets/js/pages/user/profile.js"></script>
     <script type="module">

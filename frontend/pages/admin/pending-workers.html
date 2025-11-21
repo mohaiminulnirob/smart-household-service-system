@@ -6,8 +6,33 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
+
   <body>
     <div id="navbar-dynamic"></div>
+
+    <!-- MATCH EXACT UI STRUCTURE OF ADMIN WORKERS PAGE -->
+    <section
+      style="
+        margin-top: 2rem;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      "
+    >
+      <a href="/pages/admin/workers.html" class="btn btn-secondary">
+        Workers
+      </a>
+      <a href="/pages/admin/work-requests.html" class="btn btn-secondary">
+        Service Requests
+      </a>
+      <a href="/pages/admin/update-profile.html" class="btn btn-secondary">
+        Update Profile
+      </a>
+      <a href="/pages/auth/change-password.html" class="btn btn-secondary">
+        Change Password
+      </a>
+    </section>
 
     <main class="container" style="padding: 2rem; max-width: 900px">
       <h2>Pending Workers</h2>
@@ -18,7 +43,10 @@
       <div id="pendingWorkers" style="margin-top: 1.5rem"></div>
     </main>
 
-    <script type="module" src="/assets/js/pages/admin/pending-workers.js"></script>
+    <script
+      type="module"
+      src="/assets/js/pages/admin/pending-workers.js"
+    ></script>
     <script type="module">
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto("navbar-dynamic");

@@ -10,34 +10,40 @@
     <div id="navbar-dynamic"></div>
 
     <main class="container" style="padding: 2rem 1rem; max-width: 900px">
-       <!-- PROFILE HEADER SECTION -->
+      <!-- PROFILE HEADER SECTION -->
       <div class="profile-header">
-        
         <!-- Left: Profile Picture -->
         <div class="profile-header-img">
-          <img id="dashProfileImg"
-              src="/assets/img/default-avatar.png"
-              alt="Profile Picture" />
+          <img
+            id="dashProfileImg"
+            src="../../assets/images/default-avatar.png"
+            alt="Profile Picture"
+          />
         </div>
 
         <!-- Right: Greeting Text -->
         <div class="profile-header-text">
-          <h2>Hello, <span id="dashUserName">User</span> 👋</h2>
+          <h2>Hello, <span id="dashUserName">User</span>!</h2>
           <p>Welcome to FixMate — request any service instantly!</p>
         </div>
-
       </div>
 
-
       <div style="margin-top: 2rem; display: flex; gap: 20px; flex-wrap: wrap">
-        <a href="/pages/user/create-request.html" class="btn btn-primary"
-          >➕ Create Service Request</a
-        >
-        <a href="/pages/user/my-requests.html" class="btn btn-secondary"
-          >📄 My Requests</a
-        >
-        <a href="/pages/user/profile.html" class="btn btn-secondary"
-        >👤 Profile</a> 
+        <a href="/pages/user/create-request.html" class="btn btn-secondary">
+          ➕ Create Service Request
+        </a>
+
+        <a href="/pages/user/my-requests.html" class="btn btn-secondary">
+          📄 My Requests
+        </a>
+
+        <a href="/pages/user/profile.html" class="btn btn-secondary">
+          👤 Profile
+        </a>
+
+        <a href="/pages/auth/change-password.html" class="btn btn-secondary">
+          🔑 Change Password
+        </a>
       </div>
 
       <section style="margin-top: 2.5rem">

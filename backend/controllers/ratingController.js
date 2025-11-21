@@ -59,7 +59,7 @@ export const getWorkerRatings = async (req, res) => {
   try {
     const { id } = req.params;
     const [ratings] = await query(
-      `SELECT r.id, r.score, r.comment, r.created_at, u.name AS rater_name
+      `SELECT r.id,r.request_id, r.score, r.comment, r.created_at, u.name AS rater_name
        FROM ratings r
        JOIN users u ON r.rater_id = u.id
        WHERE r.ratee_id = ?

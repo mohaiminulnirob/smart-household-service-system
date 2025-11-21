@@ -68,19 +68,28 @@ form.addEventListener('submit', async (e) => {
   const phone = form.phone.value.trim();
   const password = form.password.value;
   const skill_category = form.skill_category.value.trim();
-  const location = form.location.value.trim();
+  const locationText = form.location.value.trim();
   const latitude = form.latitude.value.trim() || null;
   const longitude = form.longitude.value.trim() || null;
 
   if (!isRequired(name)) return showError(form.name, 'Name is required');
   if (!isEmail(email)) return showError(form.email, 'Invalid email');
   if (!isRequired(phone)) return showError(form.phone, 'Phone Number is required');
-  if (!minLength(phone, 11)) return showError(form.password, 'Phone Number must be at least 11 chars');
+  if (!minLength(phone, 11)) return showError(form.phone, 'Phone Number must be at least 11 chars');
   if (!minLength(password, 6)) return showError(form.password, 'Password must be at least 6 chars');
   if (!isRequired(skill_category)) return showError(form.skill_category, 'Skill category required');
 
   try {
-    const payload = { name, email, phone, password, skill_category, location, latitude, longitude };
+   const payload = { 
+  name, 
+  email, 
+  phone, 
+  password, 
+  skill_category, 
+  location: locationText, 
+  latitude, 
+  longitude 
+  };
 
     const res = await apiFetch(ENDPOINTS.AUTH.REGISTER_WORKER, {
       method: 'POST',

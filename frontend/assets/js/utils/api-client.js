@@ -1,37 +1,37 @@
 import { API_BASE_URL } from '../config/api.js';
 import { getToken } from './storage.js';
 
-/**
- * Generic fetch wrapper for API calls.
- * - Adds Authorization header when token exists
- * - Throws JS Error on network or non-2xx responses (with message from server when available)
- */
 export async function apiFetch(endpoint, options = {}) {
   const url = endpoint.startsWith('http') ? endpoint : (API_BASE_URL + endpoint);
   const token = getToken();
 
   const controller = new AbortController();
-  const timeout = options.timeout || 10000; // 10s
+  const timeout = options.timeout || 10000;
   const id = setTimeout(() => controller.abort(), timeout);
 
-  const headers = Object.assign(
-    { 'Content-Type': 'application/json' },
-    options.headers || {}
-  );
+  const headers = { ...(options.headers || {}) };
 
-  if (token) headers['Authorization'] = `Bearer ${token}`;
+  // ⛔ Do NOT set Content-Type for GET requests
+  if (options.method && options.method !== "GET") {
+    headers["Content-Type"] = "application/json";
+  }
 
-  const opts = Object.assign(
-    {
-      method: 'GET',
-      headers,
-      signal: controller.signal,
-    },
-    options
-  );
+  // Auth header
+  if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  if (opts.body && typeof opts.body !== 'string') {
-    opts.body = JSON.stringify(opts.body);
+  const opts = {
+    method: options.method || "GET",
+    headers,
+    signal: controller.signal,
+  };
+
+  // Body handling
+  if (options.body) {
+    if (opts.method !== "GET") {
+      opts.body = typeof options.body === "string"
+        ? options.body
+        : JSON.stringify(options.body);
+    }
   }
 
   try {
@@ -40,14 +40,16 @@ export async function apiFetch(endpoint, options = {}) {
 
     const text = await res.text();
     let data = null;
-    try {
-      data = text ? JSON.parse(text) : null;
-    } catch (e) {
-      data = text;
-    }
+
+    try { data = text ? JSON.parse(text) : null; }
+    catch { data = text; }
 
     if (!res.ok) {
-      const message = (data && (data.message || data.msg || data.status)) || res.statusText || 'Request failed';
+      const message =
+        (data && (data.message || data.msg || data.error)) ||
+        res.statusText ||
+        'Request failed';
+
       const err = new Error(message);
       err.status = res.status;
       err.data = data;
@@ -57,9 +59,7 @@ export async function apiFetch(endpoint, options = {}) {
     return data;
   } catch (err) {
     clearTimeout(id);
-    if (err.name === 'AbortError') {
-      throw new Error('Request timed out');
-    }
+    if (err.name === "AbortError") throw new Error("Request timed out");
     throw err;
   }
 }

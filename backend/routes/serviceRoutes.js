@@ -4,6 +4,7 @@ import {
   cancelRequest,
   completeRequest,
   createRequest,
+  getStats,
   getUserRequests,
   getWorkerRequests,
   rejectRequest,
@@ -23,5 +24,6 @@ router.put("/:id/complete", verifyToken, completeRequest);
 router.put("/:id/accept", verifyToken, acceptRequest);
 router.put("/:id/reject", verifyToken, rejectRequest);
 router.put("/:id/cancel", verifyToken, cancelRequest);
+router.get("/dashboard/stats", getStats);
 
 export default router;

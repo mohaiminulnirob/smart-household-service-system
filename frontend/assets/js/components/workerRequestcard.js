@@ -12,6 +12,9 @@ export function createWorkerRequestCard(req, opts = {}) {
   card.style.display = "flex";
   card.style.justifyContent = "space-between";
   card.style.gap = "14px";
+  card.style.border = "1px solid #ddd";
+  card.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+  card.style.borderRadius = "12px";
 
   const fullDesc = req.description || "";
   const shortDesc =
@@ -22,9 +25,9 @@ export function createWorkerRequestCard(req, opts = {}) {
     ? new Date(req.created_at).toLocaleString()
     : "Unknown";
 
-  const imgHTML = req.problem_pic
+  const imgHTML = req.problem_Pic
     ? `
-      <img src="${req.problem_pic}" 
+      <img src="${req.problem_Pic}" 
         class="req-image-preview"
         style="width:120px;height:120px;object-fit:cover;border-radius:8px;cursor:pointer;" />
     `
@@ -33,11 +36,11 @@ export function createWorkerRequestCard(req, opts = {}) {
   card.innerHTML = `
     <div style="flex:1;">
       <h3>${req.category}</h3>
-
+      <p style="font-size:13px;color:var(--muted)">Request ID: ${req.id}</p>
       <p class="desc-text">${shortDesc}</p>
       ${
-        fullDesc.length > 80
-          ? `<button class="toggle-desc btn btn-small">Show more</button>`
+        fullDesc.length > 10
+          ? `<button class="toggle-desc btn btn-secondary">Show more</button>`
           : ""
       }
 
@@ -49,6 +52,7 @@ export function createWorkerRequestCard(req, opts = {}) {
       <div style="font-size:12px;color:var(--muted);margin-top:6px;">
         <p><b>User Info:</b></p>
         <p>Name: ${req.user_name}</p>
+        <p>ID: ${req.user_id}</p>
         <p>Email: ${req.user_email}</p>
         <p>Phone: ${req.user_phone || "Not provided"}</p>
       </div>
@@ -60,9 +64,9 @@ export function createWorkerRequestCard(req, opts = {}) {
   `;
 
   /* -------------- Image viewer -------------- */
-  if (req.problem_pic) {
+  if (req.problem_Pic) {
     const img = card.querySelector(".req-image-preview");
-    img.onclick = () => openImageViewer(req.problem_pic);
+    img.onclick = () => openImageViewer(req.problem_Pic);
   }
 
   /* Description toggle */
@@ -89,7 +93,7 @@ export function createWorkerRequestCard(req, opts = {}) {
       act.appendChild(acceptBtn);
 
       const rejectBtn = document.createElement("button");
-      rejectBtn.className = "btn btn-danger";
+      rejectBtn.className = "btn btn-secondary";
       rejectBtn.textContent = "Reject";
       rejectBtn.onclick = () => updateRequest(req.id, "reject", card);
       act.appendChild(rejectBtn);

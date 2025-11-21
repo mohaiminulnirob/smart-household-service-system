@@ -1,42 +1,86 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Update Location</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/global.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Update Location - FixMate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/assets/css/global.css" />
 
-<div id="navbar-dynamic"></div>
+    <style>
+      .auth-container {
+        max-width: 380px;
+        margin: 8rem auto;
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        text-align: center;
+      }
 
-<main class="container" style="padding:2rem;max-width:900px">
-  <h2>Update Your Location 📍</h2>
-  <p style="color:var(--muted)">Your location helps users find nearby workers.</p>
+      .auth-container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
 
-  <button class="btn btn-primary" id="gpsBtn">Use GPS</button>
+      .auth-container p {
+        color: var(--text-muted);
+        margin-bottom: 1.2rem;
+      }
 
-  <form id="locForm" style="margin-top:1.5rem">
-    <div class="form-group">
-      <label>Latitude</label>
-      <input name="latitude" class="form-control" required>
+      .auth-container input {
+        width: 100%;
+        padding: 12px;
+        border-radius: var(--radius);
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        color: var(--text);
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+
+      .auth-container .btn.btn-primary {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+      }
+
+      #gpsBtn {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="navbar-dynamic"></div>
+
+    <div class="auth-container">
+      <h2>Update Location</h2>
+      <p>Update your current latitude and longitude.</p>
+
+      <button class="btn btn-primary" id="gpsBtn">Use GPS</button>
+
+      <form id="locForm">
+        <input name="latitude" placeholder="Latitude" required />
+        <input name="longitude" placeholder="Longitude" required />
+        <button class="btn btn-primary">Update</button>
+      </form>
+
+      <p id="message" style="margin-top: 1rem; color: var(--text-muted)"></p>
+
+      <p style="margin-top: 1rem">
+        <a href="javascript:history.back()">⬅ Back</a>
+      </p>
     </div>
-    <div class="form-group">
-      <label>Longitude</label>
-      <input name="longitude" class="form-control" required>
-    </div>
 
-    <button class="btn btn-primary" style="margin-top:1rem">Update</button>
-  </form>
-
-  <div id="message" style="margin-top:1rem"></div>
-</main>
-
-<script type="module" src="/assets/js/pages/worker/update-location.js"></script>
-<script type="module">
-  import { renderNavbarInto } from "/assets/js/components/navbar.js";
-  renderNavbarInto();
-</script>
-
-</body>
+    <script
+      type="module"
+      src="/assets/js/pages/worker/update-location.js"
+    ></script>
+    <script type="module">
+      import { renderNavbarInto } from "/assets/js/components/navbar.js";
+      renderNavbarInto();
+    </script>
+  </body>
 </html>

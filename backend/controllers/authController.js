@@ -18,9 +18,12 @@ export const registerUser = async (req, res) => {
     if (!name || !email || !phone || !password)
       return res.status(400).json(error("All fields required"));
 
-    const [existing] = await query("SELECT * FROM users WHERE email = ?", [email]);
+    let [existing] = await query("SELECT * FROM users WHERE email = ?", [email]);
     if (existing.length > 0)
       return res.status(400).json(error("User already exists"));
+    [existing] = await query("SELECT * FROM workers WHERE email = ?", [email]);
+    if (existing.length > 0)
+      return res.status(400).json(error("Email is already used"));
 
     const hashed = await bcrypt.hash(password, SALT);
     const [result] = await query(
@@ -61,9 +64,12 @@ export const registerWorker = async (req, res) => {
     if (!name || !email || !phone || !password || !skill_category)
       return res.status(400).json(error("All fields required"));
 
-    const [existing] = await query("SELECT * FROM workers WHERE email = ?", [email]);
+    let [existing] = await query("SELECT * FROM workers WHERE email = ?", [email]);
     if (existing.length > 0)
       return res.status(400).json(error("Worker already exists"));
+    [existing] = await query("SELECT * FROM users WHERE email = ?", [email]);
+    if (existing.length > 0)
+      return res.status(400).json(error("Email is already used"));
 
     const hashed = await bcrypt.hash(password, SALT);
     const [result] = await query(
@@ -152,13 +158,21 @@ export const login = async (req, res) => {
 
 
     if (role === "worker") {
-      const [rows] = await query("SELECT * FROM workers WHERE email = ?", [email]);
+      // 1. Check if worker exists by email
+      let [rows] = await query("SELECT * FROM workers WHERE email = ?", [email]);
       account = rows[0];
-      if (!account) return res.status(404).json(error("Worker not found"));
+
+      if (!account)
+      return res.status(404).json(error("Worker not found"));
+
+      // 2. Check if THIS worker is verified
+      // if (account.admin_verified !== 1)
+      //  return res.status(403).json(error("Worker not approved yet"));
+
     }
 
-    if (account.email_verified === 0)
-      return res.status(403).json(error("Please verify your email before logging in."));
+    // if (account.email_verified === 0)
+    //   return res.status(403).json(error("Please verify your email before logging in."));
 
     const match = await bcrypt.compare(password, account.password_hash);
     if (!match) return res.status(400).json(error("Invalid credentials"));

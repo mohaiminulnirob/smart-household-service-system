@@ -6,7 +6,7 @@ import { getUser } from "../../utils/storage.js";
 
 requireAuth("worker");
 
-const worker = getUser(); // logged in worker
+const worker = getUser();
 const form = document.getElementById("locForm");
 const gpsBtn = document.getElementById("gpsBtn");
 const message = document.getElementById("message");

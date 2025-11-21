@@ -8,44 +8,66 @@
   </head>
   <body>
     <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container">
-      <a href="/" class="logo">
-        <span class="logo-icon">🔧</span>
-        <span>FixMate</span>
-      </a>
-      <button class="nav-toggle" id="navToggle">☰</button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/pages/aboutUs.html">About Us</a></li>
-        <!-- Sign up as user -->
-          <a href="/pages/auth/register-user.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem;">
+    <nav class="navbar">
+      <div class="container">
+        <a href="/" class="logo">
+          <span class="logo-icon">🔧</span>
+          <span>FixMate</span>
+        </a>
+        <button class="nav-toggle" id="navToggle">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li>
+            <a
+              href="/pages/aboutUs.html"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+              >About Us</a
+            >
+          </li>
+          <!-- Sign up as user -->
+          <a
+            href="/pages/auth/register-user.html"
+            class="btn btn-secondary"
+            style="padding: 0.5rem 1.5rem"
+          >
             Sign Up as User
           </a>
 
-        <!-- Normal Login -->
-        <li>
-          <a href="/pages/auth/login.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem;">
-            Sign In
-          </a>
-        </li>
+          <!-- Normal Login -->
+          <li>
+            <a
+              href="/pages/auth/login.html"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+            >
+              Sign In
+            </a>
+          </li>
 
-        <!-- Login as Admin -->
-        <li>
-          <a href="/pages/auth/login.html?as=admin" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">
-            Login as Admin
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
+          <!-- Login as Admin -->
+          <li>
+            <a
+              href="/pages/auth/login.html?as=admin"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+            >
+              Login as Admin
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <main class="container" style="padding: 3rem 1rem; max-width: 900px">
       <div class="card" style="margin: 0 auto; padding: 1.5rem">
         <div
-          style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px"
+          style="
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 8px;
+          "
         >
-          <div style="font-size: 26px">🧰</div>
           <div>
             <h2 style="margin: 0">Join as a worker</h2>
             <div style="color: var(--muted); font-size: 13px">
@@ -70,13 +92,24 @@
 
           <div class="form-group">
             <label class="form-label">Phone Number</label>
-            <input name="phone" type="tel" class="form-control" required placeholder="01xxxxxxxxx" />
+            <input
+              name="phone"
+              type="tel"
+              class="form-control"
+              required
+              placeholder="01xxxxxxxxx"
+            />
             <div class="form-error" style="display: none"></div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Password</label>
-            <input name="password" type="password" class="form-control" required />
+            <input
+              name="password"
+              type="password"
+              class="form-control"
+              required
+            />
             <div class="form-error" style="display: none"></div>
           </div>
 
@@ -96,11 +129,20 @@
 
           <div class="form-group">
             <label class="form-label">Location (text)</label>
-            <input name="location" class="form-control" placeholder="City / Area" />
+            <input
+              name="location"
+              class="form-control"
+              placeholder="City / Area"
+            />
           </div>
 
           <div
-            style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px"
+            style="
+              display: flex;
+              gap: 10px;
+              align-items: center;
+              margin-bottom: 12px;
+            "
           >
             <div style="flex: 1">
               <label class="form-label">Latitude</label>
@@ -131,7 +173,12 @@
           </div>
 
           <div
-            style="display: flex; justify-content: space-between; align-items: center; gap: 8px"
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 8px;
+            "
           >
             <a href="/pages/auth/login.html" class="btn btn-secondary">
               Back to login
@@ -155,6 +202,9 @@
       </div>
     </main>
 
-    <script type="module" src="/assets/js/pages/auth/register-worker.js"></script>
+    <script
+      type="module"
+      src="/assets/js/pages/auth/register-worker.js"
+    ></script>
   </body>
 </html>

@@ -97,7 +97,7 @@ export const createRequest = async (req, res) => {
     // ------------------------------------------------------
     const [result] = await query(
       `INSERT INTO service_requests 
-        (user_id, category, description, location, latitude, longitude, status, assigned_worker_id, problem_pic)
+        (user_id, category, description, location, latitude, longitude, status, assigned_worker_id, problem_Pic)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         user_id,
@@ -335,5 +335,51 @@ export const completeRequest = async (req, res) => {
     res.json(success("Request marked as completed"));
   } catch (err) {
     res.status(500).json(error(err.message));
+  }
+};
+export const getStats = async (req, res) => {
+  try {
+    // Total approved workers
+    const [approved] = await query(
+      "SELECT COUNT(*) AS total FROM workers WHERE admin_verified = 1"
+    );
+
+    // Total pending workers
+    const [pending] = await query(
+      "SELECT COUNT(*) AS total FROM workers WHERE admin_verified = 0"
+    );
+
+    // Work request counts
+    const [completed] = await query(
+      "SELECT COUNT(*) AS total FROM service_requests WHERE status = 'Completed'"
+    );
+
+    const [pendingReq] = await query(
+      "SELECT COUNT(*) AS total FROM service_requests WHERE status = 'Pending'"
+    );
+
+    const [cancelled] = await query(
+      "SELECT COUNT(*) AS total FROM service_requests WHERE status = 'Cancelled'"
+    );
+
+    // Average worker rating
+    const [rating] = await query(
+      "SELECT AVG(score) AS avg_rating FROM ratings"
+    );
+
+    return res.json({
+      data: {
+        approved_workers: approved[0].total,
+        pending_workers: pending[0].total,
+        completed_requests: completed[0].total,
+        pending_requests: pendingReq[0].total,
+        cancelled_requests: cancelled[0].total,
+        average_rating: Number(rating[0].avg_rating || 0).toFixed(2),
+      },
+    });
+
+  } catch (err) {
+    console.error("getDashboardStats error:", err);
+    return res.status(500).json(error(err.message));
   }
 };

@@ -2,26 +2,61 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Admin Work Requests - FixMate</title>
+    <title>Admin Service Requests - FixMate</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
 
   <body>
     <div id="navbar-dynamic"></div>
+    <section
+      style="
+        margin-top: 2rem;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      "
+    >
+      <a href="/pages/admin/workers.html" class="btn btn-secondary">
+        Workers
+      </a>
+      <a
+        href="/pages/admin/work-requests.html"
+        class="btn btn-secondary"
+        style="margin-left: 1rem"
+      >
+        Service Requests
+      </a>
+      <a
+        href="/pages/admin/update-profile.html"
+        class="btn btn-secondary"
+        style="margin-left: 1rem"
+      >
+        Update Profile
+      </a>
+      <a
+        href="/pages/auth/change-password.html"
+        class="btn btn-secondary"
+        style="margin-left: 1rem"
+      >
+        Change Password
+      </a>
+    </section>
 
     <main class="container" style="padding: 2rem; max-width: 900px">
-      <h2>Work Requests</h2>
-      <p style="color: var(--muted)">
-        View all user requests and their status.
-      </p>
-      <div style="display: flex; gap: 12px; margin-bottom: 15px">
+      <h2>Service Requests</h2>
+      <p style="color: var(--muted)">View every request submitted by users.</p>
+
+      <!-- SAME UI STRUCTURE AS USER REQUEST PAGE -->
+      <div style="margin: 1rem 0; display: flex; gap: 12px; flex-wrap: wrap">
         <select id="sortSelect" class="form-control" style="max-width: 180px">
-          <option value="newest">Newest First</option>
-          <option value="oldest">Oldest First</option>
+          <option value="desc">Newest First</option>
+          <option value="asc">Oldest First</option>
         </select>
 
-        <select id="filterSelect" class="form-control" style="max-width: 200px">
+        <select id="filterSelect" class="form-control" style="max-width: 180px">
           <option value="all">All Status</option>
           <option value="Pending">Pending</option>
           <option value="Assigned">Assigned</option>
@@ -30,8 +65,27 @@
           <option value="Cancelled">Cancelled</option>
         </select>
       </div>
+      <!-- SEARCH BAR -->
+      <div style="margin: 1rem 0; display: flex; gap: 12px; flex-wrap: wrap">
+        <select id="searchType" class="form-control" style="max-width: 180px">
+          <option value="id">Search by Request ID</option>
+          <option value="user_id">Search by User ID</option>
+          <option value="assigned_worker_id">Search by Worker ID</option>
+        </select>
 
-      <div id="workRequests"></div>
+        <input
+          type="number"
+          id="searchInput"
+          class="form-control"
+          placeholder="Enter ID..."
+          style="max-width: 200px"
+        />
+
+        <button id="searchBtn" class="btn btn-primary">Search</button>
+        <button id="resetBtn" class="btn btn-secondary">Reset</button>
+      </div>
+
+      <div id="requestsContainer" style="margin-top: 1.5rem"></div>
     </main>
 
     <script

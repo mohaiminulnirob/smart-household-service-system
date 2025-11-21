@@ -8,38 +8,55 @@
   </head>
   <body>
     <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container">
-      <a href="/" class="logo">
-        <span class="logo-icon">🔧</span>
-        <span>FixMate</span>
-      </a>
-      <button class="nav-toggle" id="navToggle">☰</button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/pages/aboutUs.html">About Us</a></li>
-        <!-- Sign up as Worker -->
-          <a href="/pages/auth/register-worker.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem;">
+    <nav class="navbar">
+      <div class="container">
+        <a href="/" class="logo">
+          <span class="logo-icon">🔧</span>
+          <span>FixMate</span>
+        </a>
+        <button class="nav-toggle" id="navToggle">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li>
+            <a
+              href="/pages/aboutUs.html"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+              >About Us</a
+            >
+          </li>
+          <!-- Sign up as Worker -->
+          <a
+            href="/pages/auth/register-worker.html"
+            class="btn btn-secondary"
+            style="padding: 0.5rem 1.5rem"
+          >
             Sign Up as Worker
           </a>
 
-        <!-- Normal Login -->
-        <li>
-          <a href="/pages/auth/login.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem;">
-            Sign In
-          </a>
-        </li>
+          <!-- Normal Login -->
+          <li>
+            <a
+              href="/pages/auth/login.html"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+            >
+              Sign In
+            </a>
+          </li>
 
-        <!-- Login as Admin -->
-        <li>
-          <a href="/pages/auth/login.html?as=admin" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">
-            Login as Admin
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-
+          <!-- Login as Admin -->
+          <li>
+            <a
+              href="/pages/auth/login.html?as=admin"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+            >
+              Login as Admin
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <main class="container" style="padding: 3rem 1rem; max-width: 800px">
       <div class="card" style="margin: 0 auto; padding: 1.75rem">
@@ -51,7 +68,6 @@
             margin-bottom: 8px;
           "
         >
-          <div style="font-size: 26px">🔐</div>
           <div>
             <h2 style="margin: 0">Create your account</h2>
             <div style="color: var(--muted); font-size: 13px">
@@ -69,13 +85,25 @@
 
           <div class="form-group">
             <label class="form-label">Email</label>
-            <input name="email" type="email" class="form-control" required />
+            <input
+              name="email"
+              type="email"
+              class="form-control"
+              required
+              placeholder="you@example.com"
+            />
             <div class="form-error" style="display: none"></div>
           </div>
 
-           <div class="form-group">
+          <div class="form-group">
             <label class="form-label">Phone Number</label>
-            <input name="phone" type="tel" class="form-control" required placeholder="01xxxxxxxxx" />
+            <input
+              name="phone"
+              type="tel"
+              class="form-control"
+              required
+              placeholder="01xxxxxxxxx"
+            />
             <div class="form-error" style="display: none"></div>
           </div>
 

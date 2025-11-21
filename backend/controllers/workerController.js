@@ -116,7 +116,7 @@ export const getWorkerProfile = async (req, res) => {
     const { id } = req.params;
 
     const [rows] = await query(
-      "SELECT id, name, email, phone, skill_category, availability, profilePic FROM workers WHERE id=?",
+      "SELECT id, name, email, phone, skill_category, availability, profilePic, created_at FROM workers WHERE id=?",
       [id]
     );
 

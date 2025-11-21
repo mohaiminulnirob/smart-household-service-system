@@ -11,18 +11,20 @@ const user = getUser();
 // Form elements
 const form = document.getElementById("updateForm");
 const nameInput = document.getElementById("name");
-const emailInput = document.getElementById("email");
+const phoneInput = document.getElementById("phone");
 const picInput = document.getElementById("profilePic");
-const saveBtn = document.getElementById("saveBtn");
 
-// Load existing profile
+// The submit button (first button inside the form)
+const saveBtn = form.querySelector("button[type='submit']");
+
+// Load current profile data
 async function loadCurrent() {
   try {
     const res = await apiFetch(ENDPOINTS.USER.GET_PROFILE(user.id));
     const data = res.data;
 
-    nameInput.value = data.name;
-    emailInput.value = data.email;
+    nameInput.value = data.name || "";
+    phoneInput.value = data.phone || "";
 
   } catch (err) {
     toast.error("Unable to load profile");
@@ -31,7 +33,7 @@ async function loadCurrent() {
 
 loadCurrent();
 
-// Update submit handler
+// Handle form submission
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -40,7 +42,7 @@ form.addEventListener("submit", async (e) => {
 
   const formData = new FormData();
   formData.append("name", nameInput.value);
-  formData.append("email", emailInput.value);
+  formData.append("phone", phoneInput.value);
 
   if (picInput.files.length > 0) {
     formData.append("profilePic", picInput.files[0]);
@@ -58,12 +60,12 @@ form.addEventListener("submit", async (e) => {
       }
     );
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message);
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.message);
 
-    // Update local user
+    // Update user in local storage
     user.name = nameInput.value;
-    user.email = emailInput.value;
+    user.phone = phoneInput.value;
     saveUser(user);
 
     toast.success("Profile updated!");

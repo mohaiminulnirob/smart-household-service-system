@@ -8,6 +8,32 @@
   </head>
   <body>
     <div id="navbar-dynamic"></div>
+    <div
+      style="
+        margin-top: 2rem;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      "
+    >
+      <a href="/pages/user/create-request.html" class="btn btn-secondary">
+        ➕ Create Service Request
+      </a>
+
+      <a href="/pages/user/my-requests.html" class="btn btn-secondary">
+        📄 My Requests
+      </a>
+
+      <a href="/pages/user/profile.html" class="btn btn-secondary">
+        👤 Profile
+      </a>
+
+      <a href="/pages/auth/change-password.html" class="btn btn-secondary">
+        🔑 Change Password
+      </a>
+    </div>
 
     <main class="container" style="padding: 2rem 1rem; max-width: 900px">
       <h2>Create Service Request</h2>
@@ -117,6 +143,15 @@
               style="height: 40px; margin-top: 22px"
             >
               Find Nearby Workers
+            </button>
+            <!-- VIEW ON MAP button (appears only after search results found) -->
+            <button
+              type="button"
+              id="viewMapBtn"
+              class="btn btn-secondary"
+              style="height: 40px; margin-top: 22px; display: none"
+            >
+              View on Map
             </button>
           </div>
         </div>

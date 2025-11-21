@@ -3,7 +3,6 @@ import { apiFetch } from "../utils/api-client.js";
 import { openImageViewer } from "../utils/image-viewer.js";
 import { toast } from "../utils/toast.js";
 
-
 export function createRequestCard(request, opts = {}) {
   const card = document.createElement("div");
   card.className = "card";
@@ -12,6 +11,9 @@ export function createRequestCard(request, opts = {}) {
   card.style.display = "flex";
   card.style.justifyContent = "space-between";
   card.style.gap = "14px";
+  card.style.border = "1px solid #ddd";
+  card.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+  card.style.borderRadius = "12px";
 
   // Prepare description
   const fullDesc = request.description || "";
@@ -35,13 +37,13 @@ export function createRequestCard(request, opts = {}) {
 
   // Build card layout
   card.innerHTML = `
-    <div style="flex:1;">
+    <div style="flex:1">
       <h3 style="margin:0">${request.category}</h3>
 
       <p class="desc-text" style="margin-top:6px">${shortDesc}</p>
       ${
         fullDesc.length > 80
-          ? `<button class="toggle-desc btn btn-small" style="margin-bottom:6px;">Show more</button>`
+          ? `<button class="toggle-desc btn btn-secondary" style="margin-bottom:6px;">Show more</button>`
           : ""
       }
 
@@ -49,7 +51,9 @@ export function createRequestCard(request, opts = {}) {
         Status: <b>${request.status}</b>
       </p>
 
-      <p style="font-size:13px;color:var(--muted)">📌 Location: ${request.location}</p>
+      <p style="font-size:13px;color:var(--muted)">📌 Location: ${
+        request.location
+      }</p>
       <p style="font-size:13px;color:var(--muted)">🕒 Requested: ${formattedDate}</p>
 
       ${

@@ -17,18 +17,33 @@
         <button class="nav-toggle" id="navToggle">☰</button>
 
         <ul class="nav-links" id="navLinks">
-          <li><a href="/pages/aboutUs.html">About Us</a></li>
+          <li>
+            <a
+              href="/pages/aboutUs.html"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+              >About Us</a
+            >
+          </li>
 
           <!-- Normal Login -->
           <li>
-            <a href="/pages/auth/login.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem;">
+            <a
+              href="/pages/auth/login.html"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+            >
               Sign In
             </a>
           </li>
 
           <!-- Login as Admin -->
           <li>
-            <a href="/pages/auth/login.html?as=admin" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">
+            <a
+              href="/pages/auth/login.html?as=admin"
+              class="btn btn-secondary"
+              style="padding: 0.5rem 1.5rem"
+            >
               Login as Admin
             </a>
           </li>
@@ -46,7 +61,6 @@
             margin-bottom: 1rem;
           "
         >
-          <div style="font-size: 28px">🔧</div>
           <div>
             <h2 style="margin: 0">Welcome back</h2>
             <div style="color: var(--muted); font-size: 13px">
@@ -130,6 +144,6 @@
       </div>
     </main>
 
-    <script type="module" src="/assets/js/pages/auth/login.js"></script>  
+    <script type="module" src="/assets/js/pages/auth/login.js"></script>
   </body>
 </html>

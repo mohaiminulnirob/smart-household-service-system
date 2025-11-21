@@ -6,6 +6,9 @@ export function openImageViewer(src) {
     <img src="${src}" class="image-viewer-img" />
   `;
 
+  // Show the modal (important!)
+  setTimeout(() => modal.classList.add("show"), 10);
+
   // Close on click anywhere
   modal.onclick = () => modal.remove();
 

@@ -24,13 +24,26 @@ async function loadWorkerInfo() {
     userNameEl.textContent = data.name || "Worker";
 
     if (data.profilePic) {
-      profileImgEl.src = data.profilePic; // Base64 from backend
+      profileImgEl.src = data.profilePic;
     }
+
+    // NEW: Set availability radio button
+    setCurrentAvailability(data.availability);
+
   } catch (err) {
     console.error(err);
   }
 }
 
+function setCurrentAvailability(status) {
+  const radio = document.querySelector(
+    `input[name="availability"][value="${status}"]`
+  );
+
+  if (radio) {
+    radio.checked = true;
+  }
+}
 loadWorkerInfo();
 
 

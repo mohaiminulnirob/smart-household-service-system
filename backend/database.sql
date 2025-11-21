@@ -96,16 +96,15 @@ CREATE TABLE blacklisted_tokens (
 
 ALTER TABLE users ADD COLUMN email_verified TINYINT DEFAULT 0;
 ALTER TABLE workers ADD COLUMN email_verified TINYINT DEFAULT 0;
+ALTER TABLE workers ADD COLUMN admin_verified TINYINT DEFAULT 0;
 
 ALTER TABLE service_requests 
 MODIFY COLUMN status 
 ENUM('Pending', 'Assigned', 'Accepted', 'Cancelled', 'Completed') 
 DEFAULT 'Pending';
-
 ALTER TABLE users ADD phone VARCHAR(20);
 ALTER TABLE workers ADD phone VARCHAR(20);
 ALTER TABLE service_requests ADD user_has_rated BOOLEAN DEFAULT FALSE;
-
 ALTER TABLE users ADD COLUMN profilePic LONGBLOB NULL;
 ALTER TABLE workers ADD COLUMN profilePic LONGBLOB NULL;
-ALTER TABLE service_requests ADD COLUMN problem_pic LONGBLOB NULL;
+ALTER TABLE service_requests ADD COLUMN problem_Pic LONGBLOB NULL;

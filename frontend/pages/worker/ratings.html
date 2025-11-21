@@ -1,29 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>My Ratings - Worker</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/global.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>My Ratings - Worker</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/assets/css/global.css" />
+  </head>
+  <body>
+    <div id="navbar-dynamic"></div>
 
-<div id="navbar-dynamic"></div>
+    <main class="container" style="padding: 2rem; max-width: 900px">
+      <!-- SAME ACTION BUTTONS AS My Requests -->
+      <div style="margin-top: 2rem; display: flex; gap: 20px; flex-wrap: wrap">
+        <a href="/pages/worker/my-requests.html" class="btn btn-secondary">
+          📄 My Requests
+        </a>
 
-<main class="container" style="padding:2rem;max-width:900px">
-  <h2>My Ratings ⭐</h2>
-  <p style="color:var(--muted)">See what users think of your work.</p>
+        <a href="/pages/worker/ratings.html" class="btn btn-secondary">
+          ⭐ My Ratings
+        </a>
 
-  <div id="summary" style="margin-top:1rem"></div>
-  <h3 style="margin-top:2rem">Reviews</h3>
-  <div id="ratingsContainer"></div>
-</main>
+        <a href="/pages/worker/profile.html" class="btn btn-secondary">
+          👤 Profile
+        </a>
 
-<script type="module" src="/assets/js/pages/worker/ratings.js"></script>
-<script type="module">
-  import { renderNavbarInto } from "/assets/js/components/navbar.js";
-  renderNavbarInto();
-</script>
+        <a href="/pages/auth/change-password.html" class="btn btn-secondary">
+          🔑 Change Password
+        </a>
+      </div>
 
-</body>
+      <!-- TITLE + SUMMARY -->
+      <h2 style="margin-top: 1.5rem">My Ratings</h2>
+      <div id="summary" style="margin-top: 1rem"></div>
+
+      <!-- FILTERS (similar to My Requests) -->
+      <div style="margin: 1rem 0; display: flex; gap: 12px; flex-wrap: wrap">
+        <select id="sortSelect" class="form-control" style="max-width: 180px">
+          <option value="desc">Newest First</option>
+          <option value="asc">Oldest First</option>
+        </select>
+
+        <select id="filterSelect" class="form-control" style="max-width: 180px">
+          <option value="all">All Ratings</option>
+          <option value="5">5 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Star</option>
+        </select>
+      </div>
+
+      <!-- RATINGS LIST -->
+      <div id="ratingsContainer" style="margin-top: 1.5rem"></div>
+    </main>
+
+    <script type="module" src="/assets/js/pages/worker/ratings.js"></script>
+    <script type="module">
+      import { renderNavbarInto } from "/assets/js/components/navbar.js";
+      renderNavbarInto();
+    </script>
+  </body>
 </html>

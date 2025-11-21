@@ -1,11 +1,13 @@
 import express from "express";
-import { 
-  approveWorker, 
-  getPendingWorkers, 
-  getWorkRequests,
+import {
+  approveWorker,
   getAdminProfile,
-  updateAdminProfile,
-  rejectWorker
+  getAllWorkers,
+  getDashboardStats,
+  getPendingWorkers,
+  getWorkRequests,
+  rejectWorker,
+  updateAdminProfile
 } from "../controllers/adminController.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
 import { requireAdmin } from "../middleware/roleMiddleware.js";
@@ -20,6 +22,7 @@ router.put("/workers/:id/reject", verifyToken, requireAdmin, rejectWorker);
 router.get("/work-requests", verifyToken, requireAdmin, getWorkRequests);
 router.get("/profile", verifyToken, requireAdmin, getAdminProfile);
 router.put("/profile/update", verifyToken, requireAdmin, updateAdminProfile);
-
+router.get('/workers/all', verifyToken, getAllWorkers);
+router.get("/dashboard/stats", verifyToken, getDashboardStats);
 
 export default router;

@@ -7,7 +7,15 @@ export const getUserProfile = async (req, res) => {
     const { id } = req.params;
 
     const [rows] = await query(
-      "SELECT id, name, email, profilePic FROM users WHERE id=?",
+      `SELECT 
+        id, 
+        name, 
+        email, 
+        phone,
+        created_at,
+        profilePic
+      FROM users 
+      WHERE id = ?`,
       [id]
     );
 
@@ -15,33 +23,37 @@ export const getUserProfile = async (req, res) => {
 
     const user = rows[0];
 
-    // Convert BLOB to Base64 for frontend
-    if (user.profilePic)
+    // Convert BLOB → Base64
+    if (user.profilePic) {
       user.profilePic = `data:image/jpeg;base64,${user.profilePic.toString("base64")}`;
+    }
 
     return res.json({ data: user });
+
   } catch (err) {
     console.error(err);
     return res.status(500).json(error(err.message));
   }
 };
 
+
 // UPDATE USER PROFILE
 export const updateUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email } = req.body;
+    const { name, phone } = req.body;   // <-- PHONE ADDED
 
     let profilePic = null;
     if (req.file) {
-      profilePic = req.file.buffer; // BLOB
+      profilePic = req.file.buffer;
     }
 
     const updates = [];
     const values = [];
 
     if (name) { updates.push("name=?"); values.push(name); }
-    if (email) { updates.push("email=?"); values.push(email); }
+   // if (email) { updates.push("email=?"); values.push(email); }
+    if (phone) { updates.push("phone=?"); values.push(phone); }  // <-- PHONE SAVED
     if (profilePic) { updates.push("profilePic=?"); values.push(profilePic); }
 
     if (!updates.length)
@@ -55,6 +67,7 @@ export const updateUserProfile = async (req, res) => {
     );
 
     return res.json(success("Profile updated successfully"));
+
   } catch (err) {
     console.error(err);
     return res.status(500).json(error(err.message));

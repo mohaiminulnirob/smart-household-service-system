@@ -12,8 +12,10 @@ export function createNearbyWorkerCard(worker, onSelect) {
   card.style.marginBottom = "10px";
   card.style.cursor = "pointer";
   card.style.transition = "0.2s";
-  card.style.borderRadius = "8px";
-
+  card.style.border = "1px solid #ddd";
+  card.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+  card.style.borderRadius = "12px";
+  
   card.innerHTML = `
     <div style="font-weight:700; font-size:16px;">
       ${worker.name}

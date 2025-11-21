@@ -1,6 +1,5 @@
-
-import { apiFetch } from "../../utils/api-client.js";
 import { ENDPOINTS } from "../../config/api.js";
+import { apiFetch } from "../../utils/api-client.js";
 import { requireAuth } from "../../utils/auth.js";
 
 requireAuth("admin");
@@ -11,24 +10,100 @@ async function loadSummary() {
   summary.innerHTML = "<p>Loading...</p>";
 
   try {
-    // use endpoints defined in config
-    const pendingRes = await apiFetch(ENDPOINTS.ADMIN.PENDING_WORKERS);
-    const requestsRes = await apiFetch(ENDPOINTS.ADMIN.WORK_REQUESTS);
-
-    // backend returns { data: [...] }
-    const pendingWorkers = Array.isArray(pendingRes?.data) ? pendingRes.data : [];
-    const workRequests = Array.isArray(requestsRes?.data) ? requestsRes.data : [];
+    const res = await apiFetch(ENDPOINTS.ADMIN.DASHBOARD_STATS);
+    const stats = res.data;
 
     summary.innerHTML = `
-      <div class="card" style="padding:15px; margin-bottom:1rem">
-        <p>Pending Workers: <b>${pendingWorkers.length}</b></p>
-      </div>
-      <div class="card" style="padding:15px; margin-bottom:1rem">
-        <p>Work Requests: <b>${workRequests.length}</b></p>
+      <div style="display:flex; flex-wrap:wrap; gap:20px; margin-top:20px;">
+
+        <!-- Approved Workers -->
+        <div class="card" 
+          style="
+            flex:1; 
+            background: var(--card-bg);
+            min-width:220px; 
+            padding:20px; 
+            border:1px solid #ddd;
+            border-radius:12px; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+          <h3>Total Approved Workers</h3>
+          <p style="font-size:24px; font-weight:bold">${stats.approved_workers}</p>
+        </div>
+
+        <!-- Pending Workers -->
+        <div class="card" 
+          style="
+            flex:1; 
+            background: var(--card-bg);
+            min-width:220px; 
+            padding:20px; 
+            border:1px solid #ddd;
+            border-radius:12px; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+          <h3>Total Pending Workers</h3>
+          <p style="font-size:24px; font-weight:bold">${stats.pending_workers}</p>
+        </div>
+
+        <!-- Completed Requests -->
+        <div class="card" 
+          style="
+            flex:1; 
+            background: var(--card-bg);
+            min-width:220px; 
+            padding:20px; 
+            border:1px solid #ddd;
+            border-radius:12px; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+          <h3>Total Completed Requests</h3>
+          <p style="font-size:24px; font-weight:bold">${stats.completed_requests}</p>
+        </div>
+
+        <!-- Pending Requests -->
+        <div class="card" 
+          style="
+            flex:1; 
+            background: var(--card-bg);
+            min-width:220px; 
+            padding:20px; 
+            border:1px solid #ddd;
+            border-radius:12px; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+          <h3>Total Pending Requests</h3>
+          <p style="font-size:24px; font-weight:bold">${stats.pending_requests}</p>
+        </div>
+
+        <!-- Cancelled Requests -->
+        <div class="card" 
+          style="
+            flex:1; 
+            background: var(--card-bg);
+            min-width:220px; 
+            padding:20px; 
+            border:1px solid #ddd;
+            border-radius:12px; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+          <h3>Total Cancelled Requests</h3>
+          <p style="font-size:24px; font-weight:bold">${stats.cancelled_requests}</p>
+        </div>
+
+        <!-- Average Rating -->
+        <div class="card" 
+          style="
+            flex:1; 
+            background: var(--card-bg);
+            min-width:220px; 
+            padding:20px; 
+            border:1px solid #ddd;
+            border-radius:12px; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+          <h3>Average Worker Rating</h3>
+          <p style="font-size:24px; font-weight:bold">${stats.average_rating}</p>
+        </div>
+
       </div>
     `;
   } catch (err) {
-    summary.innerHTML = `<p style="color:var(--error)">${err.message || "Failed to load summary"}</p>`;
+    summary.innerHTML = `<p style="color:red">${err.message || "Failed to load summary"}</p>`;
   }
 }
 

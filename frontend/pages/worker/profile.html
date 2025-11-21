@@ -5,51 +5,99 @@
     <title>Worker Profile - FixMate</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
+
+    <style>
+      .profile-container {
+        max-width: 450px;
+        margin: 2rem auto 6rem auto;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        padding: 2rem 2.2rem;
+        border-radius: var(--radius);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        text-align: center;
+      }
+
+      .profile-field {
+        text-align: left;
+        margin: 0.4rem 0;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+      }
+    </style>
   </head>
 
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="max-width: 500px; padding: 2rem">
-      <h2>My Profile</h2>
+    <!-- MATCH DASHBOARD STRUCTURE -->
+    <main class="container" style="padding: 2rem; max-width: 900px">
+      <!-- ACTION BUTTONS (EXACT SAME POSITION AS DASHBOARD) -->
+      <div style="margin-top: 2rem; display: flex; gap: 20px; flex-wrap: wrap">
+        <a href="/pages/worker/my-requests.html" class="btn btn-secondary">
+          📄 My Requests
+        </a>
 
-      <div style="text-align: center; margin-bottom: 20px">
+        <a href="/pages/worker/ratings.html" class="btn btn-secondary">
+          ⭐ My Ratings
+        </a>
+
+        <a href="/pages/worker/profile.html" class="btn btn-secondary">
+          👤 Profile
+        </a>
+        <a href="/pages/auth/change-password.html" class="btn btn-secondary">
+          🔑 Change Password
+        </a>
+      </div>
+
+      <!-- PROFILE CARD -->
+      <div class="profile-container">
         <img
           id="profileImg"
-          src="/assets/img/default-avatar.png"
+          src="../../assets/images/default-avatar.png"
           style="
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary);
             cursor: pointer;
           "
         />
-      </div>
 
-      <!-- ========== FULLSCREEN IMAGE MODAL ========== -->
-      <div id="imgModal" class="img-modal">
-        <span class="img-modal-close">&times;</span>
-        <img id="modalImg" src="" />
-      </div>
-      <!-- ============================================ -->
+        <h2 style="margin-top: 15px">My Profile</h2>
+        <p style="color: var(--muted)">Your worker account details.</p>
 
-      <div class="card" style="padding: 20px">
-        <p><b>Name:</b> <span id="name"></span></p>
-        <p><b>Email:</b> <span id="email"></span></p>
-        <p><b>Phone:</b> <span id="phone"></span></p>
-        <p><b>Skill Category:</b> <span id="skill"></span></p>
-      </div>
+        <div class="profile-field"><b>Name:</b> <span id="name"></span></div>
+        <div class="profile-field"><b>Email:</b> <span id="email"></span></div>
+        <div class="profile-field">
+          <b>Account ID:</b> <span id="uid"></span>
+        </div>
+        <div class="profile-field"><b>Phone:</b> <span id="phone"></span></div>
+        <div class="profile-field">
+          <b>Skill Category:</b> <span id="skill"></span>
+        </div>
+        <div class="profile-field">
+          <b>Account Created:</b> <span id="created_at"></span>
+        </div>
 
-      <button
-        id="updateBtn"
-        class="btn btn-primary"
-        style="margin-top: 20px; width: 100%"
-      >
-        Update Profile
-      </button>
+        <button
+          id="updateBtn"
+          class="btn btn-primary"
+          style="width: 100%; margin-top: 15px"
+        >
+          Update Profile
+        </button>
+      </div>
     </main>
+
+    <!-- Image Viewer Modal -->
+    <div id="imgModal" class="img-modal">
+      <span id="imgModalClose" class="img-modal-close">&times;</span>
+      <img id="imgModalContent" />
+    </div>
 
     <script type="module" src="/assets/js/pages/worker/profile.js"></script>
     <script type="module">

@@ -9,6 +9,7 @@ import { toast } from "../../utils/toast.js";
 const form = document.getElementById("requestForm");
 const gpsBtn = document.getElementById("gpsBtn");
 const findNearbyBtn = document.getElementById("findNearbyBtn");
+const viewMapBtn = document.getElementById("viewMapBtn");
 const msg = document.getElementById("message");
 const categorySelect = document.getElementById("categorySelect");
 const nearbyArea = document.getElementById("nearbyArea");
@@ -23,6 +24,10 @@ const locationInput = document.getElementById("locationInput");
 const fileInput = document.getElementById("imageInput");
 const previewImg = document.getElementById("previewImg");
 let base64Image = null;
+
+// Keep filtered list in memory for map view
+let lastFilteredWorkers = [];
+let lastSearchMeta = { lat: null, lng: null, category: null };
 
 // Require login
 const user = getUser();
@@ -39,7 +44,12 @@ CATEGORIES.forEach(cat => {
 // File → Base64
 fileInput.addEventListener("change", () => {
   const file = fileInput.files[0];
-  if (!file) return;
+  if (!file) {
+    base64Image = null;
+    previewImg.style.display = "none";
+    previewImg.src = "";
+    return;
+  }
 
   const reader = new FileReader();
   reader.onload = () => {
@@ -87,6 +97,7 @@ findNearbyBtn.addEventListener("click", async () => {
   nearbyArea.style.display = "none";
   selectedWorkerInput.value = "";
   clearSelectionBtn.style.display = "none";
+  viewMapBtn.style.display = "none";
 
   const lat = latitudeInput.value.trim();
   const lng = longitudeInput.value.trim();
@@ -100,16 +111,21 @@ findNearbyBtn.addEventListener("click", async () => {
 
   try {
     const url = `${ENDPOINTS.WORKERS.GET_NEARBY}?lat=${lat}&lng=${lng}&radius=5`;
+    // apiFetch returns an array (backend returns workers array)
     const workers = await apiFetch(url);
 
-    const filtered = workers.filter(
+    // Filter both by category & availability on client side
+    const filtered = (Array.isArray(workers) ? workers : []).filter(
       w =>
-        w.skill_category?.toLowerCase() === category.toLowerCase() &&
+        (w.skill_category || "").toLowerCase() === category.toLowerCase() &&
         w.availability === "Available"
     );
 
+    lastFilteredWorkers = filtered;
+    lastSearchMeta = { lat, lng, category };
+
     if (!filtered.length) {
-      nearbyList.innerHTML = "<p>No workers available nearby.</p>";
+      nearbyList.innerHTML = "<p>No available workers in this category nearby.</p>";
       nearbyArea.style.display = "block";
       return;
     }
@@ -126,13 +142,44 @@ findNearbyBtn.addEventListener("click", async () => {
     });
 
     nearbyArea.style.display = "block";
+
+    // show view map button (and enable it)
+    viewMapBtn.style.display = "inline-block";
+    viewMapBtn.disabled = false;
   } catch (err) {
-    toast.error(err.message);
+    msg.textContent = err.message || "Failed to load workers";
+    toast.error(err.message || "Failed to load workers");
   } finally {
     findNearbyBtn.disabled = false;
     findNearbyBtn.textContent = "Find Nearby Workers";
   }
 });
+
+// VIEW MAP button — open Google Maps with markers
+viewMapBtn.addEventListener("click", () => {
+  if (!lastFilteredWorkers.length) {
+    toast.info("No workers to show on map");
+    return;
+  }
+
+  const userLat = lastSearchMeta.lat;
+  const userLng = lastSearchMeta.lng;
+
+  // Build waypoints with worker ID label
+  const waypoints = lastFilteredWorkers
+    .map(w => `${w.id}:${w.latitude},${w.longitude}`)
+    .join("|");
+
+  const mapUrl =
+    `https://www.google.com/maps/dir/?api=1` +
+    `&origin=${userLat},${userLng}` +
+    `&destination=${userLat},${userLng}` + // Same as origin, forces map to open
+    `&waypoints=${encodeURIComponent(waypoints)}`;
+
+  window.open(mapUrl, "_blank");
+});
+
+
 
 // FORM SUBMIT
 form.addEventListener("submit", async e => {

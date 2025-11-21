@@ -3,19 +3,18 @@ import { clearAuth, getUser } from '../utils/storage.js';
 import { toast } from '../utils/toast.js';
 
 /**
- * Helper to create an anchor link
+ * Create a link that visually looks like a button
  */
-const createLink = (href, text, cls = '') => {
+const createBtnLink = (href, text, variant = "btn-secondary") => {
   const a = document.createElement('a');
   a.href = href;
   a.textContent = text;
-  if (cls) a.className = cls;
+  a.className = `btn ${variant}`;
+  a.style.textDecoration = "none";
+  a.style.display = "inline-block";
   return a;
 };
 
-/**
- * Render navbar into target element (default #navbar-dynamic or #navbar)
- */
 export function renderNavbarInto(targetId = 'navbar-dynamic') {
   const container =
     document.getElementById(targetId) ||
@@ -24,9 +23,8 @@ export function renderNavbarInto(targetId = 'navbar-dynamic') {
 
   if (!container) return;
 
-  const user = getUser(); // { id, name, email, role, token }
+  const user = getUser();
 
-  // Navbar wrapper
   const nav = document.createElement('nav');
   nav.className = 'navbar card';
   nav.style.cssText =
@@ -42,66 +40,46 @@ export function renderNavbarInto(targetId = 'navbar-dynamic') {
     </a>
   `;
 
-  // Right section
+  // Right side
   const right = document.createElement('div');
   right.style.display = 'flex';
   right.style.gap = '12px';
   right.style.alignItems = 'center';
 
-  /**
-   * Removed:
-   *   - Services
-   *   - How it works
-   * As requested
-   */
-
   if (!user) {
-    // Not logged in → show login/register
-    right.appendChild(createLink('/pages/auth/login.html', 'Login', 'btn-secondary'));
-    right.appendChild(createLink('/pages/auth/register-user.html', 'Sign up', 'btn-primary'));
+    // Not logged in
+    right.appendChild(createBtnLink('/pages/auth/login.html', 'Login', 'btn-secondary'));
+    right.appendChild(createBtnLink('/pages/auth/register-user.html', 'Sign up', 'btn-primary'));
   } else {
-    // Logged in → role-based navbar items
+    // Logged in → Role based
     if (user.role === 'user') {
-      right.appendChild(createLink('/pages/aboutUs.html', 'About Us'));
-      right.appendChild(createLink('/pages/user/dashboard.html', 'Dashboard'));
+      right.appendChild(createBtnLink('/pages/aboutUs.html', 'About Us', 'btn-secondary'));
+      right.appendChild(createBtnLink('/pages/user/dashboard.html', 'Dashboard', 'btn-secondary'));
     }
 
     if (user.role === 'worker') {
-      right.appendChild(createLink('/pages/aboutUs.html', 'About Us'));
-      right.appendChild(createLink('/pages/worker/dashboard.html', 'Dashboard'));
+      right.appendChild(createBtnLink('/pages/aboutUs.html', 'About Us', 'btn-secondary'));
+      right.appendChild(createBtnLink('/pages/worker/dashboard.html', 'Dashboard', 'btn-secondary'));
     }
 
-   if (user.role === 'admin') {
-    right.appendChild(createLink('/pages/aboutUs.html', 'About Us'));
-    right.appendChild(createLink('/pages/admin/dashboard.html', 'Admin'));
-  }
+    if (user.role === 'admin') {
+      right.appendChild(createBtnLink('/pages/aboutUs.html', 'About Us', 'btn-secondary'));
+      right.appendChild(createBtnLink('/pages/admin/dashboard.html', 'Admin', 'btn-secondary'));
+    }
 
-    // // Profile label
-    // const profile = document.createElement('span');
-    // profile.textContent = user.name || user.email || 'Profile';
-    // profile.style.marginLeft = '8px';
-    // profile.style.fontSize = '14px';
-    // profile.style.color = 'var(--text-secondary)';
-    // right.appendChild(profile);
-
-    // Logout button
+    // LOGOUT BUTTON
     const logout = document.createElement('button');
     logout.className = 'btn btn-secondary';
     logout.textContent = 'Logout';
 
     logout.addEventListener('click', async () => {
       try {
-        // Try server logout (blacklist token)
-        try {
-          const token = localStorage.getItem('fixmate_token');
-          if (token) {
-            await fetch(API_BASE_URL + ENDPOINTS.AUTH.LOGOUT, {
-              method: 'POST',
-              headers: { Authorization: `Bearer ${token}` },
-            });
-          }
-        } catch (err) {
-          // Ignore backend error, still clear auth
+        const token = localStorage.getItem('fixmate_token');
+        if (token) {
+          await fetch(API_BASE_URL + ENDPOINTS.AUTH.LOGOUT, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}` },
+          });
         }
 
         clearAuth();
@@ -118,7 +96,6 @@ export function renderNavbarInto(targetId = 'navbar-dynamic') {
     right.appendChild(logout);
   }
 
-  // Append
   nav.appendChild(brand);
   nav.appendChild(right);
 
