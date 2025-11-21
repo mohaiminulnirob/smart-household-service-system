@@ -165,19 +165,24 @@ viewMapBtn.addEventListener("click", () => {
   const userLat = lastSearchMeta.lat;
   const userLng = lastSearchMeta.lng;
 
-  // Build waypoints with worker ID label
+  // Only coordinates — NO worker ID text
   const waypoints = lastFilteredWorkers
-    .map(w => `${w.id}:${w.latitude},${w.longitude}`)
+    .map(w => `${w.latitude},${w.longitude}`)
     .join("|");
+
+  // This time: destination = last worker
+  const lastWorker = lastFilteredWorkers[lastFilteredWorkers.length - 1];
+  const destination = `${lastWorker.latitude},${lastWorker.longitude}`;
 
   const mapUrl =
     `https://www.google.com/maps/dir/?api=1` +
     `&origin=${userLat},${userLng}` +
-    `&destination=${userLat},${userLng}` + // Same as origin, forces map to open
+    `&destination=${destination}` +
     `&waypoints=${encodeURIComponent(waypoints)}`;
 
   window.open(mapUrl, "_blank");
 });
+
 
 
 

@@ -22,7 +22,7 @@ export function createPendingWorkerCard(worker) {
 
     <div style="margin-top:12px; display:flex; gap:10px">
       <button class="btn btn-primary approveBtn">Approve</button>
-      <button class="btn btn-danger rejectBtn">Reject</button>
+      <button class="btn btn-secondary rejectBtn">Reject</button>
     </div>
   `;
 

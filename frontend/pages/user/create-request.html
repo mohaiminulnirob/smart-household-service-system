@@ -1,194 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Create Request - FixMate</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="/assets/css/global.css" />
-  </head>
-  <body>
-    <div id="navbar-dynamic"></div>
-    <div
-      style="
+
+<head>
+  <meta charset="utf-8" />
+  <title>Create Request - FixMate</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/assets/css/global.css" />
+</head>
+
+<body>
+  <div id="navbar-dynamic"></div>
+  <div style="
         margin-top: 2rem;
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
         justify-content: center;
         text-align: center;
-      "
-    >
-      <a href="/pages/user/create-request.html" class="btn btn-secondary">
-        ➕ Create Service Request
-      </a>
+      ">
+    <a href="/pages/user/create-request.html" class="btn btn-secondary">
+      ➕ Create Service Request
+    </a>
 
-      <a href="/pages/user/my-requests.html" class="btn btn-secondary">
-        📄 My Requests
-      </a>
+    <a href="/pages/user/my-requests.html" class="btn btn-secondary">
+      📄 My Requests
+    </a>
 
-      <a href="/pages/user/profile.html" class="btn btn-secondary">
-        👤 Profile
-      </a>
+    <a href="/pages/user/profile.html" class="btn btn-secondary">
+      👤 Profile
+    </a>
 
-      <a href="/pages/auth/change-password.html" class="btn btn-secondary">
-        🔑 Change Password
-      </a>
-    </div>
+    <a href="/pages/auth/change-password.html" class="btn btn-secondary">
+      🔑 Change Password
+    </a>
+  </div>
 
-    <main class="container" style="padding: 2rem 1rem; max-width: 900px">
-      <h2>Create Service Request</h2>
-      <p style="color: var(--muted)">
-        Describe your issue and optionally pick a nearby worker before
-        submitting.
-      </p>
+  <main class="container" style="padding: 2rem 1rem; max-width: 900px">
+    <h2>Create Service Request</h2>
+    <p style="color: var(--muted)">
+      Describe your issue and optionally pick a nearby worker before
+      submitting.
+    </p>
 
-      <form id="requestForm" style="margin-top: 1rem">
-        <div class="form-group">
-          <label class="form-label">Category</label>
-          <select
-            class="form-control"
-            name="category"
-            id="categorySelect"
-            required
-          >
-            <option value="">Select one</option>
-          </select>
-          <div class="form-error" style="display: none"></div>
-        </div>
+    <form id="requestForm" style="margin-top: 1rem">
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select class="form-control" name="category" id="categorySelect" required>
+          <option value="">Select one</option>
+        </select>
+        <div class="form-error" style="display: none"></div>
+      </div>
 
-        <div class="form-group">
-          <label class="form-label">Description</label>
-          <textarea
-            class="form-control"
-            name="description"
-            rows="3"
-            required
-          ></textarea>
-          <div class="form-error" style="display: none"></div>
-        </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" name="description" rows="3" required></textarea>
+        <div class="form-error" style="display: none"></div>
+      </div>
 
-        <div class="form-group">
-          <label class="form-label">Location (text)</label>
-          <input
-            class="form-control"
-            name="location"
-            id="locationInput"
-            required
-          />
-          <div class="form-error"></div>
-        </div>
+      <div class="form-group">
+        <label class="form-label">Location (text)</label>
+        <input class="form-control" name="location" id="locationInput" required />
+        <div class="form-error"></div>
+      </div>
 
-        <!-- IMAGE UPLOAD -->
-        <div class="form-group">
-          <label class="form-label">Problem Image (optional)</label>
-          <input
-            type="file"
-            id="imageInput"
-            accept="image/*"
-            class="form-control"
-          />
-          <img
-            id="previewImg"
-            style="
+      <!-- IMAGE UPLOAD -->
+      <div class="form-group">
+        <label class="form-label">Problem Image (optional)</label>
+        <input type="file" id="imageInput" accept="image/*" class="form-control" />
+        <img id="previewImg" style="
               display: none;
               width: 160px;
               margin-top: 10px;
               border-radius: 8px;
-            "
-          />
-        </div>
+            " />
+      </div>
 
-        <div
-          style="
+      <div style="
             display: flex;
             gap: 10px;
             align-items: center;
             margin-top: 1rem;
             flex-wrap: wrap;
-          "
-        >
-          <div style="flex: 1; min-width: 150px">
-            <label class="form-label">Latitude</label>
-            <input
-              name="latitude"
-              id="latitudeInput"
-              class="form-control"
-              placeholder="23.7806"
-            />
-          </div>
-
-          <div style="flex: 1; min-width: 150px">
-            <label class="form-label">Longitude</label>
-            <input
-              name="longitude"
-              id="longitudeInput"
-              class="form-control"
-              placeholder="90.2794"
-            />
-          </div>
-
-          <div style="display: flex; gap: 8px; align-items: center">
-            <button
-              type="button"
-              id="gpsBtn"
-              class="btn btn-secondary"
-              style="height: 40px; margin-top: 22px"
-            >
-              Use GPS
-            </button>
-            <button
-              type="button"
-              id="findNearbyBtn"
-              class="btn btn-primary"
-              style="height: 40px; margin-top: 22px"
-            >
-              Find Nearby Workers
-            </button>
-            <!-- VIEW ON MAP button (appears only after search results found) -->
-            <button
-              type="button"
-              id="viewMapBtn"
-              class="btn btn-secondary"
-              style="height: 40px; margin-top: 22px; display: none"
-            >
-              View on Map
-            </button>
-          </div>
+          ">
+        <div style="flex: 1; min-width: 150px">
+          <label class="form-label">Latitude</label>
+          <input name="latitude" id="latitudeInput" class="form-control" placeholder="23.7806" />
         </div>
 
-        <input type="hidden" id="selectedWorkerId" name="selected_worker_id" />
-
-        <div id="nearbyArea" style="margin-top: 1rem; display: none">
-          <h3>Nearby Workers</h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem">
-            Select one worker to explicitly assign them (optional).
-          </p>
-          <div id="nearbyList"></div>
+        <div style="flex: 1; min-width: 150px">
+          <label class="form-label">Longitude</label>
+          <input name="longitude" id="longitudeInput" class="form-control" placeholder="90.2794" />
         </div>
 
-        <div style="margin-top: 1rem; display: flex; gap: 12px">
-          <button type="submit" class="btn btn-primary">Submit Request</button>
-          <button
-            type="button"
-            id="clearSelection"
-            class="btn btn-secondary"
-            style="display: none"
-          >
-            Clear selection
+        <div style="display: flex; gap: 8px; align-items: center">
+          <button type="button" id="gpsBtn" class="btn btn-secondary" style="height: 40px; margin-top: 22px">
+            Use GPS
+          </button>
+          <button type="button" id="findNearbyBtn" class="btn btn-primary" style="height: 40px; margin-top: 22px">
+            Find Nearby Workers
+          </button>
+          <!-- VIEW ON MAP button (appears only after search results found) -->
+          <button type="button" id="viewMapBtn" class="btn btn-secondary"
+            style="height: 40px; margin-top: 22px; display: none">
+            View on Map
           </button>
         </div>
-      </form>
+      </div>
 
-      <div id="message" style="margin-top: 1rem"></div>
-    </main>
+      <input type="hidden" id="selectedWorkerId" name="selected_worker_id" />
 
-    <script
-      type="module"
-      src="/assets/js/pages/user/create-request.js"
-    ></script>
-    <script type="module">
-      import { renderNavbarInto } from "/assets/js/components/navbar.js";
-      renderNavbarInto();
-    </script>
-  </body>
+      <div id="nearbyArea" style="margin-top: 1rem; display: none">
+        <h3>Nearby Workers</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem">
+          Select one worker to explicitly assign them (optional).
+        </p>
+        <div id="nearbyList"></div>
+      </div>
+
+      <div style="margin-top: 1rem; display: flex; gap: 12px">
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+        <button type="button" id="clearSelection" class="btn btn-secondary" style="display: none">
+          Clear selection
+        </button>
+      </div>
+    </form>
+
+    <div id="message" style="margin-top: 1rem"></div>
+  </main>
+
+  <script type="module" src="/assets/js/pages/user/create-request.js"></script>
+  <script type="module">
+    import { renderNavbarInto } from "/assets/js/components/navbar.js";
+    renderNavbarInto();
+  </script>
+</body>
+
 </html>

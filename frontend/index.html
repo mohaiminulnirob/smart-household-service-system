@@ -1,104 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>FixMate — Home Services Made Simple</title>
-    <link rel="stylesheet" href="/assets/css/global.css" />
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="container">
-        <a href="/" class="logo">
-          <span class="logo-icon">🔧</span>
-          <span>FixMate</span>
-        </a>
-        <button class="nav-toggle" id="navToggle">☰</button>
-        <ul class="nav-links" id="navLinks">
-          <li>
-            <a
-              href="/pages/aboutUs.html"
-              class="btn btn-secondary"
-              style="padding: 0.5rem 1.5rem"
-              >About Us</a
-            >
-          </li>
 
-          <!-- Normal Login -->
-          <li>
-            <a
-              href="/pages/auth/login.html"
-              class="btn btn-secondary"
-              style="padding: 0.5rem 1.5rem"
-            >
-              Sign In
-            </a>
-          </li>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FixMate — Home Services Made Simple</title>
+  <link rel="stylesheet" href="/assets/css/global.css" />
+</head>
 
-          <!-- Login as Admin -->
-          <li>
-            <a
-              href="/pages/auth/login.html?as=admin"
-              class="btn btn-secondary"
-              style="padding: 0.5rem 1.5rem"
-            >
-              Login as Admin
-            </a>
-          </li>
-        </ul>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="logo">
+        <span class="logo-icon">🔧</span>
+        <span>FixMate</span>
+      </a>
+      <button class="nav-toggle" id="navToggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li>
+          <a href="/pages/aboutUs.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem">About Us</a>
+        </li>
+
+        <!-- Normal Login -->
+        <li>
+          <a href="/pages/auth/login.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem">
+            Sign In
+          </a>
+        </li>
+
+        <!-- Login as Admin -->
+        <li>
+          <a href="/pages/auth/login.html?as=admin" class="btn btn-secondary" style="padding: 0.5rem 1.5rem">
+            Login as Admin
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>
+          Professional Home Services <br />
+          <span class="gradient-text">At Your Fingertips</span>
+        </h2>
+        <p class="hero-subtitle">
+          Connect with verified, rated professionals near you for all your
+          home service needs.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/pages/auth/register-user.html">Book a Service</a>
+          <a class="btn btn-secondary" href="/pages/auth/register-worker.html">Join as Worker</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number" id="statWorkers" data-target="0">0</div>
+            <div class="stat-label">Active Workers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" id="statCompleted" data-target="0">
+              0
+            </div>
+            <div class="stat-label">Jobs Completed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" id="statRating" data-target="0">0</div>
+            <div class="stat-label">Avg Rating</div>
+          </div>
+        </div>
       </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <main>
-      <section class="hero">
-        <div class="hero-content">
-          <h2>
-            Professional Home Services <br />
-            <span class="gradient-text">At Your Fingertips</span>
-          </h2>
-          <p class="hero-subtitle">
-            Connect with verified, rated professionals near you for all your
-            home service needs.
-          </p>
-          <div class="hero-cta">
-            <a class="btn btn-secondary" href="/pages/auth/register-user.html"
-              >Book a Service</a
-            >
-            <a class="btn btn-secondary" href="/pages/auth/register-worker.html"
-              >Join as Worker</a
-            >
-          </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="floating-card card-1">🔨 Carpentry</div>
+        <div class="floating-card card-2">🔌 Electrical</div>
+        <div class="floating-card card-3">🚰 Plumbing</div>
+        <div class="floating-card card-4">🧹 Cleaning</div>
+        <div class="floating-card card-5">🎨 Painting</div>
+      </div>
+    </section>
+  </main>
 
-          <div class="hero-stats">
-            <div class="stat">
-              <div class="stat-number" id="statWorkers" data-target="0">0</div>
-              <div class="stat-label">Active Workers</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number" id="statCompleted" data-target="0">
-                0
-              </div>
-              <div class="stat-label">Jobs Completed</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number" id="statRating" data-target="0">0</div>
-              <div class="stat-label">Avg Rating</div>
-            </div>
-          </div>
-        </div>
+  <script type="module" src="/assets/js/pages/landing.js"></script>
+</body>
 
-        <div class="hero-visual" aria-hidden="true">
-          <div class="floating-card card-1">🔨 Carpentry</div>
-          <div class="floating-card card-2">🔌 Electrical</div>
-          <div class="floating-card card-3">🚰 Plumbing</div>
-          <div class="floating-card card-4">🧹 Cleaning</div>
-          <div class="floating-card card-5">🎨 Painting</div>
-        </div>
-      </section>
-    </main>
-
-    <script type="module" src="/assets/js/pages/landing.js"></script>
-  </body>
 </html>

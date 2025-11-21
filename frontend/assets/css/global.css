@@ -3,9 +3,9 @@
 ---------------------------------------------------- */
 :root {
   /* Primary Colors */
-  --primary: #6366f1;
-  --primary-dark: #5aa8a9;
-  --secondary: #3b82f6;
+  --primary: #247BA0;
+  --primary-dark: #605F5E;
+  --secondary: #188FA7;
 
   /* Background Colors */
   --bg: #0a0f1e;
@@ -53,6 +53,7 @@ a {
   text-decoration: none;
   transition: 0.3s;
 }
+
 a:hover {
   color: var(--primary-dark);
 }
@@ -74,8 +75,9 @@ a:hover {
   background: var(--primary);
   color: var(--bg);
 }
+
 .btn-primary:hover {
-  background: var(--primary-dark);
+  background: var(--secondary);
   transform: translateY(-2px);
   /*box-shadow: 0 10px 25px rgba(63, 170, 156, 0.3);*/
 }
@@ -85,6 +87,7 @@ a:hover {
   color: var(--text);
   border: 2px solid var(--border);
 }
+
 .btn-secondary:hover {
   border-color: var(--primary);
   color: var(--primary);
@@ -131,6 +134,7 @@ a:hover {
   color: var(--text);
   font-size: 0.95rem;
 }
+
 .nav-links a:hover {
   color: var(--primary);
 }
@@ -226,33 +230,45 @@ a:hover {
   top: 5%;
   left: 10%;
   animation-delay: 0s;
-} /* top-left */
+}
+
+/* top-left */
 .card-2 {
   top: 5%;
   right: 10%;
   animation-delay: 0.5s;
-} /* top-right */
+}
+
+/* top-right */
 .card-3 {
   bottom: 5%;
   left: 10%;
   animation-delay: 1s;
-} /* bottom-left */
+}
+
+/* bottom-left */
 .card-4 {
   bottom: 5%;
   right: 10%;
   animation-delay: 1.5s;
-} /* bottom-right */
+}
+
+/* bottom-right */
 .card-5 {
   top: 40%;
   left: 40%;
   animation-delay: 2s;
-} /* center card */
+}
+
+/* center card */
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
@@ -312,10 +328,12 @@ select.form-control option {
   text-align: center;
   margin-bottom: 3rem;
 }
+
 .section-header h2 {
   font-size: 2.5rem;
   font-weight: 800;
 }
+
 .section-header p {
   color: var(--text-muted);
   font-size: 1.1rem;
@@ -334,6 +352,7 @@ select.form-control option {
   padding: 2rem;
   transition: 0.3s;
 }
+
 .service-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
@@ -437,6 +456,7 @@ select.form-control option {
     gap: 1.5rem;
     transition: 0.3s;
   }
+
   .nav-links.active {
     left: 0;
   }

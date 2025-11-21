@@ -72,7 +72,6 @@ ALTER TABLE service_requests
   ADD COLUMN latitude DECIMAL(10,7) NULL,
   ADD COLUMN longitude DECIMAL(10,7) NULL;
 
-UPDATE users SET role = 'admin' WHERE email = 'user1@example.com';
 
 CREATE TABLE tokens (
   id INT AUTO_INCREMENT PRIMARY KEY,
