@@ -69,54 +69,8 @@
         >🔑 Change Password</a
       >
     </div>
-    <div class="profile-container">
-      <img
-        id="profileImg"
-        src="../../assets/images/default-avatar.png"
-        class="clickable-profile-img"
-        style="
-          width: 140px;
-          height: 140px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 3px solid var(--primary);
-          cursor: pointer;
-        "
-      />
 
-      <h2 style="margin-top: 15px">My Profile</h2>
-      <p style="color: var(--muted); margin-bottom: 1.5rem">
-        View your details and manage your account.
-      </p>
-
-      <div class="profile-field"><b>Name:</b> <span id="name"></span></div>
-
-      <div class="profile-field"><b>Email:</b> <span id="email"></span></div>
-
-      <div class="profile-field"><b>Account ID:</b> <span id="uid"></span></div>
-
-      <div class="profile-field"><b>Phone:</b> <span id="phone"></span></div>
-
-      <div class="profile-field">
-        <b>Account Created:</b> <span id="created_at"></span>
-      </div>
-
-      <button id="updateBtn" class="btn btn-primary action-btn">
-        Update Profile
-      </button>
-
-      <button id="activityLog" class="btn btn-primary action-btn">
-        Activity log
-      </button>
-    </div>
-
-    <!-- Image Viewer Modal -->
-    <div id="imgModal" class="img-modal">
-      <span id="imgModalClose" class="img-modal-close">&times;</span>
-      <img id="imgModalContent" />
-    </div>
-
-    <script type="module" src="/assets/js/pages/user/profile.js"></script>
+    <script type="module" src="/assets/js/pages/user/activity.js"></script>
     <script type="module">
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();

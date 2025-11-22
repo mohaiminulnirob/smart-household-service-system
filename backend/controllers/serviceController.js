@@ -105,6 +105,10 @@ export const createRequest = async (req, res) => {
         problemPicBuffer
       ]
     );
+     await query(
+      "INSERT INTO activity_log (user_id, activity_type, description) VALUES (?, 'Create Request', 'User created request')",
+      [user_id]
+    );
 
     return res.status(201).json({
       ...success("Service request created successfully"),
@@ -149,6 +153,10 @@ export const cancelRequest = async (req, res) => {
       "UPDATE service_requests SET status = 'Cancelled' WHERE id = ?",
       [id]
     );
+     await query(
+      "INSERT INTO activity_log (user_id, activity_type, description) VALUES (?, 'Cancel Request', 'User cancelled a request')",
+      [userId]
+    );
 
     res.json(success("Request cancelled successfully"));
   } catch (err) {
@@ -185,6 +193,7 @@ export const acceptRequest = async (req, res) => {
     await query("UPDATE workers SET availability = 'Busy' WHERE id = ?", [
       workerId,
     ]);
+    
 
     res.json(success("Request accepted successfully"));
   } catch (err) {
@@ -255,7 +264,6 @@ export const getUserRequests = async (req, res) => {
        ORDER BY sr.created_at DESC`,
       [id]
     );
-
     // Convert BLOB → Base64 for frontend
     const formatted = rows.map(r => {
       if (r.problem_pic)

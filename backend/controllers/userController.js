@@ -27,6 +27,10 @@ export const getUserProfile = async (req, res) => {
     if (user.profilePic) {
       user.profilePic = `data:image/jpeg;base64,${user.profilePic.toString("base64")}`;
     }
+     await query(
+      "INSERT INTO activity_log (user_id, activity_type, description) VALUES (?, 'View Profile', 'User viewed profile')",
+      [id]
+    );
 
     return res.json({ data: user });
 
@@ -41,7 +45,7 @@ export const getUserProfile = async (req, res) => {
 export const updateUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, phone } = req.body;   // <-- PHONE ADDED
+    const { name, phone } = req.body;   
 
     let profilePic = null;
     if (req.file) {
@@ -53,7 +57,7 @@ export const updateUserProfile = async (req, res) => {
 
     if (name) { updates.push("name=?"); values.push(name); }
    // if (email) { updates.push("email=?"); values.push(email); }
-    if (phone) { updates.push("phone=?"); values.push(phone); }  // <-- PHONE SAVED
+    if (phone) { updates.push("phone=?"); values.push(phone); }  
     if (profilePic) { updates.push("profilePic=?"); values.push(profilePic); }
 
     if (!updates.length)
@@ -65,8 +69,32 @@ export const updateUserProfile = async (req, res) => {
       `UPDATE users SET ${updates.join(", ")} WHERE id=?`,
       values
     );
+     await query(
+      "INSERT INTO activity_log (user_id, activity_type, description) VALUES (?, 'Profile Update', 'User updated profile')",
+      [id]
+    );
 
     return res.json(success("Profile updated successfully"));
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(error(err.message));
+  }
+};
+export const getUserActivity = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [rows] = await query(
+      `SELECT * from activity_log 
+      WHERE user_id = ?`,
+      [id]
+    );
+
+    if (!rows.length) return res.status(404).json(error("No activity found"));
+
+
+    return res.json({ data: rows });
 
   } catch (err) {
     console.error(err);

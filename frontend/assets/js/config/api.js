@@ -15,6 +15,7 @@ export const ENDPOINTS = {
   USER: {
   GET_PROFILE: (id) => `/users/profile/${id}`,
   UPDATE_PROFILE: (id) => `/users/profile/update/${id}`,
+  VIEW_ACTIVITY: (id) => `/users/activity/${id}`,
   },
   ADMIN: {
     PENDING_WORKERS: '/admin/workers/pending',

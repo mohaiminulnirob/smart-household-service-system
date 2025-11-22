@@ -1,10 +1,11 @@
 import express from "express";
 import multer from "multer";
-import { verifyToken } from "../middleware/authMiddleware.js";
 import {
+  getUserActivity,
   getUserProfile,
   updateUserProfile
 } from "../controllers/userController.js";
+import { verifyToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ const upload = multer({ storage });
 
 // Get user profile
 router.get("/profile/:id", verifyToken, getUserProfile);
-
+router.get("/activity/:id",verifyToken, getUserActivity)
 // Update profile + picture
 router.put(
   "/profile/update/:id",

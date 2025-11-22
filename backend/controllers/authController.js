@@ -155,8 +155,14 @@ export const login = async (req, res) => {
      return res.status(404).json(error("No account found with this email and role"));
     }
     }
+    let user_id=account.id;
 
-
+    if(role==="user"){
+      await query(
+      "INSERT INTO activity_log (user_id, activity_type, description) VALUES (?, 'login', 'User logs in')",
+      [user_id]
+    );
+    }
     if (role === "worker") {
       // 1. Check if worker exists by email
       let [rows] = await query("SELECT * FROM workers WHERE email = ?", [email]);
@@ -217,6 +223,10 @@ export const changePassword = async (req, res) => {
     const hashed = await bcrypt.hash(newPassword, SALT);
     if (users[0]) {
       await query("UPDATE users SET password_hash = ? WHERE id = ?", [hashed, userId]);
+      await query(
+      "INSERT INTO activity_log (user_id, activity_type, description) VALUES (?, 'Change Password', 'User changed password')",
+      [userId]
+    );
     } else {
       await query("UPDATE workers SET password_hash = ? WHERE id = ?", [hashed, userId]);
     }
@@ -367,15 +377,20 @@ export const resetPassword = async (req, res) => {
 //logout controller using token blacklisting
 export const logout = async (req, res) => {
   try {
+    let userId=req.id;
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(400).json(error("Token required"));
 
     const decoded = jwt.decode(token);
-
     await query(
       "INSERT INTO blacklisted_tokens (token, expires_at) VALUES (?, FROM_UNIXTIME(?))",
       [token, decoded.exp]
     );
+     await query(
+      "INSERT INTO activity_log (user_id, activity_type, description) VALUES (?, 'logout', 'User logged out')",
+      [userId]
+    );
+
 
     res.json(success("Logged out successfully"));
   } catch (err) {

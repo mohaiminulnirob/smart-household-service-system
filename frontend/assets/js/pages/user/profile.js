@@ -16,6 +16,7 @@ const modal = document.getElementById("imgModal");
 const modalImg = document.getElementById("imgModalContent");
 const modalClose = document.getElementById("imgModalClose");
 const updateBtn = document.getElementById("updateBtn");
+const activityLog = document.getElementById("activityLog");
 
 // Load profile info
 async function loadProfile() {
@@ -62,4 +63,7 @@ modal.addEventListener("click", (e) => {
 // Update profile redirects
 updateBtn.addEventListener("click", () => {
   window.location.href = "/pages/user/update-profile.html";
+});
+activityLog.addEventListener("click", () => {
+  window.location.href = "/pages/user/activity.html";
 });
