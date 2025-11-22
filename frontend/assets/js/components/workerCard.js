@@ -1,10 +1,5 @@
 import { toast } from "../utils/toast.js";
 
-// /**
-//  * Creates a worker selection card (no view button).
-//  * @param {Object} worker - worker data from backend
-//  * @param {Function} onSelect - callback when user selects worker
-//  */
 export function createNearbyWorkerCard(worker, onSelect) {
   const card = document.createElement("div");
   card.className = "card";
@@ -15,7 +10,7 @@ export function createNearbyWorkerCard(worker, onSelect) {
   card.style.border = "1px solid #ddd";
   card.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
   card.style.borderRadius = "12px";
-  
+
   card.innerHTML = `
     <div style="font-weight:700; font-size:16px;">
       ${worker.name}

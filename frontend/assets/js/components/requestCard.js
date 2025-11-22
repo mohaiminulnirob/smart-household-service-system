@@ -41,30 +41,27 @@ export function createRequestCard(request, opts = {}) {
       <h3 style="margin:0">${request.category}</h3>
 
       <p class="desc-text" style="margin-top:6px">${shortDesc}</p>
-      ${
-        fullDesc.length > 80
-          ? `<button class="toggle-desc btn btn-secondary" style="margin-bottom:6px;">Show more</button>`
-          : ""
-      }
+      ${fullDesc.length > 80
+      ? `<button class="toggle-desc btn btn-secondary" style="margin-bottom:6px;">Show more</button>`
+      : ""
+    }
 
       <p style="color:var(--muted);margin:4px 0">
         Status: <b>${request.status}</b>
       </p>
 
-      <p style="font-size:13px;color:var(--muted)">📌 Location: ${
-        request.location
-      }</p>
+      <p style="font-size:13px;color:var(--muted)">📌 Location: ${request.location
+    }</p>
       <p style="font-size:13px;color:var(--muted)">🕒 Requested: ${formattedDate}</p>
 
-      ${
-        request.worker_name
-          ? `
+      ${request.worker_name
+      ? `
         <p style="font-size:13px;color:var(--muted);margin-top:6px">
           Assigned Worker: <b>${request.worker_name}</b><br>
           Phone: ${request.worker_phone || "Not provided"}
         </p>`
-          : `<p style="font-size:13px;color:var(--muted);margin-top:6px">No worker assigned</p>`
-      }
+      : `<p style="font-size:13px;color:var(--muted);margin-top:6px">No worker assigned</p>`
+    }
 
       <div class="actions" style="margin-top:10px"></div>
     </div>
@@ -73,13 +70,13 @@ export function createRequestCard(request, opts = {}) {
     <div>${imgHTML}</div>
   `;
 
-  /* ---------------- IMAGE VIEWER ---------------- */
+  //IMAGE VIEWER 
   if (request.problem_pic) {
     const img = card.querySelector(".req-image-preview");
     img.onclick = () => openImageViewer(request.problem_pic);
   }
 
-  /* ---------------- Description toggle ---------------- */
+  //Description toggle 
   const descEl = card.querySelector(".desc-text");
   const toggleBtn = card.querySelector(".toggle-desc");
 
@@ -128,7 +125,7 @@ export function createRequestCard(request, opts = {}) {
   return card;
 }
 
-/* ---------------- CANCEL REQUEST ---------------- */
+//CANCEL REQUEST 
 async function cancelRequest(id, card) {
   if (!confirm("Cancel this request?")) return;
 
@@ -141,7 +138,7 @@ async function cancelRequest(id, card) {
   }
 }
 
-/* ---------------- RATING ---------------- */
+//RATING
 function openRatingModal(request, btn) {
   const score = prompt("Rate the worker (1-5):");
   if (!score) return;

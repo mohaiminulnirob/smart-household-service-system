@@ -1,170 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>About Us — FixMate</title>
-    <link rel="stylesheet" href="/assets/css/global.css" />
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="container">
-        <a href="/" class="logo">
-          <span class="logo-icon">🔧</span>
-          <span>FixMate</span>
-        </a>
-        <button class="nav-toggle" id="navToggle">☰</button>
-        <ul class="nav-links" id="navLinks">
-          <li>
-            <a
-              href="/index.html"
-              class="btn btn-secondary"
-              style="padding: 0.5rem 1.5rem"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a
-              href="#services"
-              class="btn btn-secondary"
-              style="padding: 0.5rem 1.5rem"
-              >About Us</a
-            >
-          </li>
-          <li>
-            <a
-              href="/pages/auth/login.html"
-              class="btn btn-secondary"
-              style="padding: 0.5rem 1.5rem"
-              >Sign In</a
-            >
-          </li>
-          <!-- Login as Admin -->
-          <li>
-            <a
-              href="/pages/auth/login.html?as=admin"
-              class="btn btn-secondary"
-              style="padding: 0.5rem 1.5rem"
-            >
-              Login as Admin
-            </a>
-          </li>
-        </ul>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us — FixMate</title>
+  <link rel="stylesheet" href="/assets/css/global.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="logo">
+        <span class="logo-icon">🔧</span>
+        <span>FixMate</span>
+      </a>
+      <button class="nav-toggle" id="navToggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li>
+          <a href="/index.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem">Home</a>
+        </li>
+        <li>
+          <a href="#services" class="btn btn-secondary" style="padding: 0.5rem 1.5rem">About Us</a>
+        </li>
+        <li>
+          <a href="/pages/auth/login.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem">Sign In</a>
+        </li>
+        <!-- Login as Admin -->
+        <li>
+          <a href="/pages/auth/login.html?as=admin" class="btn btn-secondary" style="padding: 0.5rem 1.5rem">
+            Login as Admin
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Services Section -->
+    <section class="services" id="services">
+      <div class="section-header">
+        <h2>Popular Services</h2>
+        <p>Expert professionals ready to help with your home needs</p>
       </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-      <!-- Services Section -->
-      <section class="services" id="services">
-        <div class="section-header">
-          <h2>Popular Services</h2>
-          <p>Expert professionals ready to help with your home needs</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🔨</div>
+          <h3>Carpentry</h3>
+          <p>
+            Furniture assembly, repairs, and custom woodwork by skilled
+            carpenters
+          </p>
         </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">🔨</div>
-            <h3>Carpentry</h3>
-            <p>
-              Furniture assembly, repairs, and custom woodwork by skilled
-              carpenters
-            </p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🔌</div>
-            <h3>Electrical</h3>
-            <p>
-              Safe and certified electrical installations, repairs, and
-              maintenance
-            </p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🚰</div>
-            <h3>Plumbing</h3>
-            <p>
-              Professional plumbing services for leaks, installations, and
-              repairs
-            </p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🎨</div>
-            <h3>Painting</h3>
-            <p>
-              Interior and exterior painting services with attention to detail
-            </p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">❄️</div>
-            <h3>AC Repair</h3>
-            <p>
-              Air conditioning installation, maintenance, and emergency repairs
-            </p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🧹</div>
-            <h3>Cleaning</h3>
-            <p>Professional home cleaning services for a spotless space</p>
-          </div>
+        <div class="service-card">
+          <div class="service-icon">🔌</div>
+          <h3>Electrical</h3>
+          <p>
+            Safe and certified electrical installations, repairs, and
+            maintenance
+          </p>
         </div>
-      </section>
+        <div class="service-card">
+          <div class="service-icon">🚰</div>
+          <h3>Plumbing</h3>
+          <p>
+            Professional plumbing services for leaks, installations, and
+            repairs
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Painting</h3>
+          <p>
+            Interior and exterior painting services with attention to detail
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">❄️</div>
+          <h3>AC Repair</h3>
+          <p>
+            Air conditioning installation, maintenance, and emergency repairs
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🧹</div>
+          <h3>Cleaning</h3>
+          <p>Professional home cleaning services for a spotless space</p>
+        </div>
+      </div>
+    </section>
 
-      <!-- How It Works Section -->
-      <section class="how-it-works" id="how-it-works">
-        <div class="section-header">
-          <h2>How It Works</h2>
-          <p>Your service journey in 3 simple steps</p>
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>Your service journey in 3 simple steps</p>
+      </div>
+
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-icon">📝</div>
+          <h3>1. Book a Service</h3>
+          <p>
+            Select the service you need and submit your request in minutes.
+          </p>
         </div>
 
-        <div class="how-grid">
-          <div class="how-card">
-            <div class="how-icon">📝</div>
-            <h3>1. Book a Service</h3>
-            <p>
-              Select the service you need and submit your request in minutes.
-            </p>
-          </div>
-
-          <div class="how-card">
-            <div class="how-icon">👷</div>
-            <h3>2. Get Matched Instantly</h3>
-            <p>We connect you with a nearby verified & rated professional.</p>
-          </div>
-
-          <div class="how-card">
-            <div class="how-icon">✔️</div>
-            <h3>3. Service Completed</h3>
-            <p>The worker completes the job — safely, reliably, and on time.</p>
-          </div>
+        <div class="how-card">
+          <div class="how-icon">👷</div>
+          <h3>2. Get Matched Instantly</h3>
+          <p>We connect you with a nearby verified & rated professional.</p>
         </div>
-      </section>
 
-      <!-- About Section -->
-      <section class="about" id="about">
-        <div class="section-header">
-          <h2>About Us</h2>
+        <div class="how-card">
+          <div class="how-icon">✔️</div>
+          <h3>3. Service Completed</h3>
+          <p>The worker completes the job — safely, reliably, and on time.</p>
         </div>
-        <p>
-          FixMate is a modern home-service platform connecting customers with
-          verified, skilled, and trusted professionals. Our mission is to make
-          home maintenance simple, fast, and reliable for everyone.
-        </p>
-        <p>
-          Whether you need electrical repairs, cleaning, plumbing, or carpentry,
-          FixMate ensures professional service with transparent pricing and easy
-          booking.
-        </p>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <!-- Scripts -->
-    <script>
-      const navToggle = document.getElementById("navToggle");
-      const navLinks = document.getElementById("navLinks");
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="section-header">
+        <h2>About Us</h2>
+      </div>
+      <p>
+        FixMate is a modern home-service platform connecting customers with
+        verified, skilled, and trusted professionals. Our mission is to make
+        home maintenance simple, fast, and reliable for everyone.
+      </p>
+      <p>
+        Whether you need electrical repairs, cleaning, plumbing, or carpentry,
+        FixMate ensures professional service with transparent pricing and easy
+        booking.
+      </p>
+    </section>
+  </main>
 
-      navToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-      });
-    </script>
-  </body>
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+</body>
+
 </html>

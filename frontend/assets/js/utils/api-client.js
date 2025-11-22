@@ -11,7 +11,7 @@ export async function apiFetch(endpoint, options = {}) {
 
   const headers = { ...(options.headers || {}) };
 
-  // ⛔ Do NOT set Content-Type for GET requests
+  // Do NOT set Content-Type for GET requests
   if (options.method && options.method !== "GET") {
     headers["Content-Type"] = "application/json";
   }

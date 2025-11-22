@@ -22,9 +22,7 @@ export const createRequest = async (req, res) => {
     let assignedWorkerId = null;
     let status = "Pending";
 
-    // ------------------------------------------------------
-    // 📌 1) Convert Base64 → Buffer (if exists)
-    // ------------------------------------------------------
+    // Convert Base64 → Buffer (if exists)
     let problemPicBuffer = null;
 
     if (problem_pic) {
@@ -38,9 +36,8 @@ export const createRequest = async (req, res) => {
       }
     }
 
-    // ------------------------------------------------------
-    // 📌 2) Worker selected manually
-    // ------------------------------------------------------
+
+    // Worker selected manually
     if (selected_worker_id) {
       const [workerRows] = await query(
         "SELECT id, skill_category, availability FROM workers WHERE id = ?",
@@ -66,11 +63,9 @@ export const createRequest = async (req, res) => {
 
       assignedWorkerId = worker.id;
       status = "Assigned";
-    } 
+    }
     else {
-      // ------------------------------------------------------
-      // 📌 3) Auto-assign nearest worker
-      // ------------------------------------------------------
+      // Auto-assign nearest worker
       const [workers] = await query(
         `SELECT id, latitude, longitude,
                 (6371 * ACOS(
@@ -92,9 +87,8 @@ export const createRequest = async (req, res) => {
       }
     }
 
-    // ------------------------------------------------------
-    // 📌 4) INSERT Request with image buffer (LONGBLOB)
-    // ------------------------------------------------------
+
+    //INSERT Request with image buffer (LONGBLOB)
     const [result] = await query(
       `INSERT INTO service_requests 
         (user_id, category, description, location, latitude, longitude, status, assigned_worker_id, problem_Pic)
@@ -229,7 +223,6 @@ export const rejectRequest = async (req, res) => {
   }
 };
 
-// Get all requests by a user (now includes problem_pic base64)
 // Get all requests by a user
 export const getUserRequests = async (req, res) => {
   try {
@@ -337,6 +330,8 @@ export const completeRequest = async (req, res) => {
     res.status(500).json(error(err.message));
   }
 };
+
+// Get stats
 export const getStats = async (req, res) => {
   try {
     // Total approved workers

@@ -1,6 +1,6 @@
 import { ENDPOINTS } from "../config/api.js";
 import { apiFetch } from "../utils/api-client.js";
-
+// load landing stats
 async function loadLandingStats() {
   try {
     const res = await apiFetch(ENDPOINTS.REQUESTS.STATS);
@@ -25,7 +25,6 @@ function animateStats() {
     const target = parseFloat(el.dataset.target || "0");
     let start = 0;
     const isFloat = target % 1 !== 0;
-    const duration = 1200;
     const steps = 60;
     let step = 0;
 

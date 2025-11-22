@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Admin Dashboard - FixMate</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="/assets/css/global.css" />
-  </head>
-  <body>
-    <div id="navbar-dynamic"></div>
 
-    <main class="container" style="padding: 2rem; max-width: 900px">
-      <!-- ADMIN ACTION BUTTONS (Unified UI) -->
-      <div
-        style="
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Dashboard - FixMate</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/assets/css/global.css" />
+</head>
+
+<body>
+  <div id="navbar-dynamic"></div>
+
+  <main class="container" style="padding: 2rem; max-width: 900px">
+    <!-- ADMIN ACTION BUTTONS (Unified UI) -->
+    <div style="
           margin-top: 2rem;
           display: flex;
           gap: 20px;
           flex-wrap: wrap;
           justify-content: center;
-        "
-      >
-        <a href="/pages/admin/workers.html" class="btn btn-secondary">
-          Workers
-        </a>
+        ">
+      <a href="/pages/admin/workers.html" class="btn btn-secondary">
+        Workers
+      </a>
 
-        <a href="/pages/admin/work-requests.html" class="btn btn-secondary">
-          Service Requests
-        </a>
+      <a href="/pages/admin/work-requests.html" class="btn btn-secondary">
+        Service Requests
+      </a>
 
-        <a href="/pages/admin/update-profile.html" class="btn btn-secondary">
-          Update Profile
-        </a>
+      <a href="/pages/admin/update-profile.html" class="btn btn-secondary">
+        Update Profile
+      </a>
 
-        <a href="/pages/auth/change-password.html" class="btn btn-secondary">
-          Change Password
-        </a>
-        <a href="/pages/admin/pending-workers.html" class="btn btn-secondary">
-          Approve Pending Workers
-        </a>
-      </div>
+      <a href="/pages/auth/change-password.html" class="btn btn-secondary">
+        Change Password
+      </a>
+      <a href="/pages/admin/pending-workers.html" class="btn btn-primary">
+        Approve Pending Workers
+      </a>
+    </div>
 
-      <section style="margin-top: 2rem">
-        <h3>System Summary</h3>
-        <div id="summary"></div>
-      </section>
-    </main>
+    <section style="margin-top: 2rem">
+      <h3>System Summary</h3>
+      <div id="summary"></div>
+    </section>
+  </main>
 
-    <script type="module" src="/assets/js/pages/admin/dashboard.js"></script>
-    <script type="module">
-      import { renderNavbarInto } from "/assets/js/components/navbar.js";
-      renderNavbarInto("navbar-dynamic");
-    </script>
-  </body>
+  <script type="module" src="/assets/js/pages/admin/dashboard.js"></script>
+  <script type="module">
+    import { renderNavbarInto } from "/assets/js/components/navbar.js";
+    renderNavbarInto("navbar-dynamic");
+  </script>
+</body>
+
 </html>

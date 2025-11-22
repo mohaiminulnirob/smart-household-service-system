@@ -2,9 +2,7 @@ import { API_BASE_URL, ENDPOINTS } from '../config/api.js';
 import { clearAuth, getUser } from '../utils/storage.js';
 import { toast } from '../utils/toast.js';
 
-/**
- * Create a link that visually looks like a button
- */
+//Create a link that visually looks like a button
 const createBtnLink = (href, text, variant = "btn-secondary") => {
   const a = document.createElement('a');
   a.href = href;

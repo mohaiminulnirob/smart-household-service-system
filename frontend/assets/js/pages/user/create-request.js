@@ -167,12 +167,12 @@ viewMapBtn.addEventListener("click", () => {
 
   // Only coordinates — NO worker ID text
   const waypoints = lastFilteredWorkers
-    .map(w => `${w.latitude},${w.longitude}`)
+    .map(w => `${w.id}:${w.latitude},${w.longitude}`)
     .join("|");
 
   // This time: destination = last worker
   const lastWorker = lastFilteredWorkers[lastFilteredWorkers.length - 1];
-  const destination = `${lastWorker.latitude},${lastWorker.longitude}`;
+  const destination = `${lastWorker.id}:${lastWorker.latitude},${lastWorker.longitude}`;
 
   const mapUrl =
     `https://www.google.com/maps/dir/?api=1` +

@@ -38,11 +38,10 @@ export function createWorkerRequestCard(req, opts = {}) {
       <h3>${req.category}</h3>
       <p style="font-size:13px;color:var(--muted)">Request ID: ${req.id}</p>
       <p class="desc-text">${shortDesc}</p>
-      ${
-        fullDesc.length > 10
-          ? `<button class="toggle-desc btn btn-secondary">Show more</button>`
-          : ""
-      }
+      ${fullDesc.length > 10
+      ? `<button class="toggle-desc btn btn-secondary">Show more</button>`
+      : ""
+    }
 
       <p style="color:var(--muted)">Status: <b>${req.status}</b></p>
 
@@ -63,13 +62,13 @@ export function createWorkerRequestCard(req, opts = {}) {
     <div>${imgHTML}</div>
   `;
 
-  /* -------------- Image viewer -------------- */
+  //Image viewer
   if (req.problem_Pic) {
     const img = card.querySelector(".req-image-preview");
     img.onclick = () => openImageViewer(req.problem_Pic);
   }
 
-  /* Description toggle */
+  //Description toggle
   const descEl = card.querySelector(".desc-text");
   const toggleBtn = card.querySelector(".toggle-desc");
 
@@ -118,15 +117,15 @@ export function createWorkerRequestCard(req, opts = {}) {
 }
 
 
-/* UPDATE REQUEST */
+//UPDATE REQUEST
 async function updateRequest(id, action, card) {
   try {
     const endpoint =
       action === "accept"
         ? ENDPOINTS.REQUESTS.ACCEPT(id)
         : action === "reject"
-        ? ENDPOINTS.REQUESTS.REJECT(id)
-        : ENDPOINTS.REQUESTS.COMPLETE(id);
+          ? ENDPOINTS.REQUESTS.REJECT(id)
+          : ENDPOINTS.REQUESTS.COMPLETE(id);
 
     await apiFetch(endpoint, { method: "PUT" });
     toast.success(`Request ${action}ed`);
@@ -136,7 +135,7 @@ async function updateRequest(id, action, card) {
   }
 }
 
-/* NAVIGATION */
+//NAVIGATION
 function openNavigation(req) {
   const destLat = req.latitude;
   const destLng = req.longitude;

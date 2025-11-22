@@ -166,6 +166,7 @@ export const updateAdminProfile = async (req, res) => {
   }
 };
 
+//get all valid workers
 export const getAllWorkers = async (req, res) => {
   try {
     const [rows] = await query(`
@@ -182,6 +183,7 @@ export const getAllWorkers = async (req, res) => {
   }
 };
 
+//get dashboard stats
 export const getDashboardStats = async (req, res) => {
   try {
     // Total approved workers

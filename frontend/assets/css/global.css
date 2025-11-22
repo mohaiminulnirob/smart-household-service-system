@@ -169,9 +169,10 @@ a:hover {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--primary));
+  background: var(--primary);
+  background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .hero-subtitle {

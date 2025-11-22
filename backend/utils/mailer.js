@@ -12,7 +12,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// verify transporter once at startup in server.js (optional)
 const sendMail = async (options) => {
   const mailOptions = {
     from: process.env.SMTP_FROM || `"FixMate" <${process.env.SMTP_USER}>`,

@@ -88,6 +88,16 @@ export const getNearbyWorkers = async (req, res) => {
 
     if (!lat || !lng)
       return res.status(400).json(error("Latitude and longitude are required"));
+    //haversine formula
+    //     distance = R * arccos(
+    //     sin(φ1) * sin(φ2) +
+    //     cos(φ1) * cos(φ2) * cos(λ2 - λ1)
+    //     )
+
+    // Where:
+    // φ1, φ2 = latitudes in radians
+    // λ1, λ2 = longitudes in radians
+    // R = 6371 km (Earth's radius)
 
     const [workers] = await query(
       `SELECT id, name, skill_category, availability, rating, latitude, longitude,

@@ -80,16 +80,16 @@ form.addEventListener('submit', async (e) => {
   if (!isRequired(skill_category)) return showError(form.skill_category, 'Skill category required');
 
   try {
-   const payload = { 
-  name, 
-  email, 
-  phone, 
-  password, 
-  skill_category, 
-  location: locationText, 
-  latitude, 
-  longitude 
-  };
+    const payload = {
+      name,
+      email,
+      phone,
+      password,
+      skill_category,
+      location: locationText,
+      latitude,
+      longitude
+    };
 
     const res = await apiFetch(ENDPOINTS.AUTH.REGISTER_WORKER, {
       method: 'POST',
@@ -105,7 +105,7 @@ form.addEventListener('submit', async (e) => {
     resendBtn.dataset.email = email;
 
 
-    setTimeout(() => location.href = '/pages/auth/login.html', 1600);
+    setTimeout(() => location.href = '/pages/auth/login.html', 16000);
   } catch (err) {
     toast.error(err.message || 'Registration failed');
     msg.textContent = err.message || 'Registration failed';
