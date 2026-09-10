@@ -1,5 +1,5 @@
 import express from "express";
-import multer from "multer";
+import { upload } from "../middleware/upload.js";
 import {
   getWorkerProfile,
   updateWorkerProfile,
@@ -13,7 +13,6 @@ import {
 import { verifyToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
-const upload = multer({ storage: multer.memoryStorage() });
 
 // Worker Profile
 router.get("/profile/:id", verifyToken, getWorkerProfile);

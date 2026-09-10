@@ -13,6 +13,7 @@ import ratingRoutes from "./routes/ratingRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import workerRoutes from "./routes/workerRoutes.js";
+import statsRoutes from "./routes/statsRoutes.js";
 
 import requestLogger from "./middleware/requestLogger.js";
 import logger from "./utils/logger.js";
@@ -37,6 +38,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/requests", serviceRoutes);
 app.use("/api/ratings", ratingRoutes);
 app.use("/api/workers", workerRoutes);
+app.use("/api/stats", statsRoutes);
 app.use("/api/users", userRoutes);
 
 // Root API route
@@ -66,13 +68,13 @@ const testDB = async () => {
 };
 testDB();
 
-// Test SMTP transporter
+// Test mail provider
 const testMailer = async () => {
   try {
-    await mailer.transporter.verify();
-    logger.info("SMTP transporter ready");
+    await mailer.verify();
+    logger.info("Mail provider ready");
   } catch (err) {
-    logger.warn("SMTP transporter verification failed: " + err.message);
+    logger.warn("Mail provider verification failed: " + err.message);
   }
 };
 testMailer();

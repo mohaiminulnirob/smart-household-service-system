@@ -1,3 +1,4 @@
+import { skeletonCard, emptyState } from "../../components/skeletonCard.js";
 import { workerCard } from "../../components/workerCard.js";
 import { apiFetch } from "../../utils/api-client.js";
 import { requireAuth } from "../../utils/auth.js";
@@ -17,7 +18,8 @@ searchBtn.addEventListener("click", async () => {
         return;
     }
 
-    output.innerHTML = "<p class='text-center'>Loading...</p>";
+    output.innerHTML = "";
+    output.appendChild(skeletonCard('worker', 3));
 
     try {
         const workers = await apiFetch(`/workers/nearby?service=${service}`);
@@ -29,7 +31,7 @@ searchBtn.addEventListener("click", async () => {
         });
 
         if (workers.length === 0) {
-            output.innerHTML = "<p class='text-center text-muted'>No workers found.</p>";
+            output.appendChild(emptyState('worker'));
         }
     } catch (err) {
         toast.error("Failed to fetch workers");

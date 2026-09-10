@@ -2,12 +2,15 @@ import { apiFetch } from "../../utils/api-client.js";
 import { ENDPOINTS } from "../../config/api.js";
 import { toast } from "../../utils/toast.js";
 import { requireAuth } from "../../utils/auth.js";
+import { bindValidation, validateForm, clearFormErrors } from "../../utils/validation.js";
 
 requireAuth("worker");
 
 const form = document.getElementById("locForm");
 const gpsBtn = document.getElementById("gpsBtn");
 const message = document.getElementById("message");
+
+bindValidation(form);
 
 gpsBtn.addEventListener("click", () => {
   if (!navigator.geolocation) {
@@ -36,6 +39,9 @@ gpsBtn.addEventListener("click", () => {
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  clearFormErrors(form);
+  if (!validateForm(form)) return;
 
   const latitude = form.latitude.value.trim();
   const longitude = form.longitude.value.trim();

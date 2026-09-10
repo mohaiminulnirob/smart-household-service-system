@@ -3,20 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <title>Create Request - FixMate</title>
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="padding: 2rem 1rem; max-width: 900px">
+    <main class="container p-lg" style="max-width: 900px">
       <h2>Create Service Request</h2>
-      <p style="color: var(--muted)">
+      <p class="text-muted">
         Describe your issue and optionally pick a nearby worker before
         submitting.
       </p>
 
-      <form id="requestForm" style="margin-top: 1rem">
+      <form id="requestForm" class="mt-md">
         <div class="form-group">
           <label class="form-label">Category</label>
           <select
@@ -27,7 +28,7 @@
           >
             <option value="">Select one</option>
           </select>
-          <div class="form-error" style="display: none"></div>
+          <div class="form-error"></div>
         </div>
 
         <div class="form-group">
@@ -38,7 +39,7 @@
             rows="3"
             required
           ></textarea>
-          <div class="form-error" style="display: none"></div>
+          <div class="form-error"></div>
         </div>
 
         <div class="form-group">
@@ -63,25 +64,12 @@
           />
           <img
             id="previewImg"
-            style="
-              display: none;
-              width: 160px;
-              margin-top: 10px;
-              border-radius: 8px;
-            "
+            class="preview-img"
           />
         </div>
 
-        <div
-          style="
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-          "
-        >
-          <div style="flex: 1; min-width: 150px">
+        <div class="flex-row flex-wrap mt-md gap-10">
+          <div class="flex-1" style="min-width: 150px">
             <label class="form-label">Latitude</label>
             <input
               name="latitude"
@@ -91,7 +79,7 @@
             />
           </div>
 
-          <div style="flex: 1; min-width: 150px">
+          <div class="flex-1" style="min-width: 150px">
             <label class="form-label">Longitude</label>
             <input
               name="longitude"
@@ -101,12 +89,11 @@
             />
           </div>
 
-          <div style="display: flex; gap: 8px; align-items: center">
+          <div class="flex-row gap-sm">
             <button
               type="button"
               id="gpsBtn"
               class="btn btn-secondary"
-              style="height: 40px; margin-top: 22px"
             >
               Use GPS
             </button>
@@ -114,7 +101,6 @@
               type="button"
               id="findNearbyBtn"
               class="btn btn-primary"
-              style="height: 40px; margin-top: 22px"
             >
               Find Nearby Workers
             </button>
@@ -123,15 +109,15 @@
 
         <input type="hidden" id="selectedWorkerId" name="selected_worker_id" />
 
-        <div id="nearbyArea" style="margin-top: 1rem; display: none">
+        <div id="nearbyArea" class="mt-md" style="display: none">
           <h3>Nearby Workers</h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem">
+          <p class="text-muted" style="font-size: 0.95rem">
             Select one worker to explicitly assign them (optional).
           </p>
           <div id="nearbyList"></div>
         </div>
 
-        <div style="margin-top: 1rem; display: flex; gap: 12px">
+        <div class="flex-row mt-md gap-md">
           <button type="submit" class="btn btn-primary">Submit Request</button>
           <button
             type="button"
@@ -144,7 +130,7 @@
         </div>
       </form>
 
-      <div id="message" style="margin-top: 1rem"></div>
+      <div id="message" class="mt-md"></div>
     </main>
 
     <script
@@ -155,5 +141,10 @@
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();
     </script>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>

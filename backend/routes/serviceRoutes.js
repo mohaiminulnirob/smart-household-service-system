@@ -1,4 +1,5 @@
 import express from "express";
+import { upload } from "../middleware/upload.js";
 import {
   acceptRequest,
   cancelRequest,
@@ -12,8 +13,7 @@ import { verifyToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// All require authentication
-router.post("/", verifyToken, createRequest);
+router.post("/", verifyToken, upload.single("problem_pic"), createRequest);
 
 router.get("/user/:id", verifyToken, getUserRequests);
 router.get("/worker/:id", verifyToken, getWorkerRequests);

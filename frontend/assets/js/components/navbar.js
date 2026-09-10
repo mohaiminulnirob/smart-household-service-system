@@ -37,7 +37,7 @@ export function renderNavbarInto(targetId = 'navbar-dynamic') {
   const brand = document.createElement('div');
   brand.innerHTML = `
     <a href="/index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none">
-      <span style="font-size:20px">🔧</span>
+      <img src="/assets/images/fixmate-logo.png" alt="FixMate" style="height:24px;width:24px">
       <strong style="color:var(--primary)">&nbsp;FixMate</strong>
     </a>
   `;
@@ -45,7 +45,7 @@ export function renderNavbarInto(targetId = 'navbar-dynamic') {
   // Right section
   const right = document.createElement('div');
   right.style.display = 'flex';
-  right.style.gap = '12px';
+  right.style.gap = '24px';
   right.style.alignItems = 'center';
 
   /**
@@ -81,14 +81,6 @@ export function renderNavbarInto(targetId = 'navbar-dynamic') {
     right.appendChild(createLink('/pages/admin/work-requests.html', 'Work Requests'));
     right.appendChild(createLink('/pages/admin/profile.html', 'Profile'));
   }
-
-    // Profile label
-    const profile = document.createElement('span');
-    profile.textContent = user.name || user.email || 'Profile';
-    profile.style.marginLeft = '8px';
-    profile.style.fontSize = '14px';
-    profile.style.color = 'var(--text-secondary)';
-    right.appendChild(profile);
 
     // Logout button
     const logout = document.createElement('button');

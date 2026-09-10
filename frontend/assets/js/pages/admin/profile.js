@@ -3,6 +3,7 @@ import { apiFetch } from "../../utils/api-client.js";
 import { getUser, saveUser } from "../../utils/storage.js";
 import { toast } from "../../utils/toast.js";
 import { requireAuth } from "../../utils/auth.js";
+import { bindValidation, validateForm, clearFormErrors } from "../../utils/validation.js";
 import { ENDPOINTS } from "../../config/api.js";
 
 // Only allow admin
@@ -34,9 +35,14 @@ async function loadProfile() {
 
 loadProfile();
 
+bindValidation(profileForm);
+
 // Submit
 profileForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  clearFormErrors(profileForm);
+  if (!validateForm(profileForm)) return;
 
   submitBtn.disabled = true;
   submitBtn.textContent = "Updating...";

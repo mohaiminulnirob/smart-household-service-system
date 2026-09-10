@@ -10,16 +10,11 @@ const logger = winston.createLogger({
   transports: [
     new winston.transports.File({ filename: "logs/error.log", level: "error" }),
     new winston.transports.File({ filename: "logs/combined.log" }),
-  ],
-});
-
-// Show logs in console only in dev
-if (process.env.NODE_ENV !== "production") {
-  logger.add(
+    // Console is always enabled so logs are visible on Render
     new winston.transports.Console({
       format: winston.format.simple(),
-    })
-  );
-}
+    }),
+  ],
+});
 
 export default logger;

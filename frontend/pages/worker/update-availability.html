@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Update Availability - FixMate</title>
+  <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/assets/css/global.css">
+</head>
+<body>
+
+<div id="navbar-dynamic"></div>
+
+<main class="container p-lg" style="max-width:900px">
+  <h2>Update Availability ⚡</h2>
+  <p class="text-muted">Let users know when you're available for work.</p>
+
+  <form id="availForm" class="mt-lg">
+    <div class="form-group">
+      <label class="form-label">Status</label>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+        <label class="card" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+          <input type="radio" name="availability" value="Available" />
+          <span style="font-size:1.2rem">🟢</span>
+          <div>
+            <strong>Available</strong>
+            <p class="text-muted" style="font-size:0.85rem">Ready to accept new service requests</p>
+          </div>
+        </label>
+        <label class="card" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+          <input type="radio" name="availability" value="Busy" />
+          <span style="font-size:1.2rem">🟡</span>
+          <div>
+            <strong>Busy</strong>
+            <p class="text-muted" style="font-size:0.85rem">Currently working on a job</p>
+          </div>
+        </label>
+        <label class="card" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+          <input type="radio" name="availability" value="Offline" />
+          <span style="font-size:1.2rem">🔴</span>
+          <div>
+            <strong>Offline</strong>
+            <p class="text-muted" style="font-size:0.85rem">Not taking any requests right now</p>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px">
+      <button class="btn btn-primary" type="submit">Update</button>
+      <a href="/pages/worker/dashboard.html" class="btn btn-secondary">&larr; Back to Dashboard</a>
+    </div>
+  </form>
+
+  <div id="message" class="mt-md"></div>
+</main>
+
+<script type="module" src="/assets/js/pages/worker/update-availability.js"></script>
+<script type="module">
+  import { renderNavbarInto } from "/assets/js/components/navbar.js";
+  renderNavbarInto();
+</script>
+
+<div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
+</html>

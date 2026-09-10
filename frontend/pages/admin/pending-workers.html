@@ -3,19 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <title>Pending Workers</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="padding: 2rem; max-width: 900px">
+    <main class="container p-lg" style="max-width: 900px">
       <h2>Pending Workers</h2>
-      <p style="color: var(--muted)">
+      <p class="text-muted">
         Approve workers who are verified but waiting admin approval.
       </p>
 
-      <div id="pendingWorkers" style="margin-top: 1.5rem"></div>
+      <div id="pendingWorkers" class="mt-lg"></div>
     </main>
 
     <script type="module" src="/assets/js/pages/admin/pending-workers.js"></script>
@@ -23,5 +24,10 @@
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto("navbar-dynamic");
     </script>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>

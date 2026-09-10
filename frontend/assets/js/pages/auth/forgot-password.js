@@ -1,12 +1,18 @@
 import { apiFetch } from '../../utils/api-client.js';
 import { ENDPOINTS } from '../../config/api.js';
 import { toast } from '../../utils/toast.js';
+import { bindValidation, validateForm, clearFormErrors } from '../../utils/validation.js';
 
-document.getElementById("forgotForm").addEventListener("submit", async (e) => {
+const form = document.getElementById("forgotForm");
+bindValidation(form);
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  clearFormErrors(form);
+  if (!validateForm(form)) return;
+
   const email = document.getElementById("email").value.trim();
-  if (!email) return toast.error("Email is required");
 
   try {
     const res = await apiFetch(ENDPOINTS.AUTH.FORGOT_PASSWORD, {

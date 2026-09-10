@@ -3,19 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <title>User Dashboard - FixMate</title>
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="padding: 2rem 1rem; max-width: 900px">
+    <main class="container p-lg" style="max-width: 900px">
       <h2>Hello 👋</h2>
-      <p style="color: var(--muted)">
+      <p class="text-muted">
         Welcome to FixMate — request any service instantly!
       </p>
 
-      <div style="margin-top: 2rem; display: flex; gap: 20px; flex-wrap: wrap">
+      <div class="card-grid mt-lg">
         <a href="/pages/user/create-request.html" class="btn btn-primary"
           >➕ Create Service Request</a
         >
@@ -26,7 +27,7 @@
         >👤 Profile</a> 
       </div>
 
-      <section style="margin-top: 2.5rem">
+      <section class="mt-lg">
         <h3>Your Recent Requests</h3>
         <div id="recentRequests"></div>
       </section>
@@ -37,5 +38,10 @@
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();
     </script>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>

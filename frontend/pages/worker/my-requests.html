@@ -3,23 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <title>My Requests - Worker</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="padding: 2rem; max-width: 900px">
+    <main class="container p-lg" style="max-width: 900px">
       <h2>My Assigned Requests</h2>
-      <div style="margin: 1rem 0; display: flex; gap: 12px; flex-wrap: wrap">
+      <div class="flex-row flex-wrap mt-md">
         <!-- Sort -->
-        <select id="sortSelect" class="form-control" style="max-width: 180px">
+        <select id="sortSelect" class="form-control max-w-180">
           <option value="desc">Newest First</option>
           <option value="asc">Oldest First</option>
         </select>
 
         <!-- Filter -->
-        <select id="filterSelect" class="form-control" style="max-width: 180px">
+        <select id="filterSelect" class="form-control max-w-180">
           <option value="all">All Status</option>
           <option value="Pending">Pending</option>
           <option value="Assigned">Assigned</option>
@@ -29,7 +30,7 @@
         </select>
       </div>
 
-      <div id="requestsContainer" style="margin-top: 1.5rem"></div>
+      <div id="requestsContainer" class="mt-lg"></div>
     </main>
 
     <script type="module" src="/assets/js/pages/worker/my-requests.js"></script>
@@ -37,5 +38,10 @@
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();
     </script>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>

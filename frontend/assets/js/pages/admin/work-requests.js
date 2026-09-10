@@ -1,3 +1,4 @@
+import { skeletonCard, emptyState } from "../../components/skeletonCard.js";
 import { ENDPOINTS } from "../../config/api.js";
 import { apiFetch } from "../../utils/api-client.js";
 import { requireAuth } from "../../utils/auth.js";
@@ -9,22 +10,28 @@ const sortSelect = document.getElementById("sortSelect");
 const filterSelect = document.getElementById("filterSelect");
 
 let allRequests = []; // store full list
+let isLoading = true;
 
 async function loadRequests() {
-  container.innerHTML = "<p>Loading...</p>";
+  isLoading = true;
+  container.innerHTML = "";
+  container.appendChild(skeletonCard('admin-request', 5));
 
   try {
     const res = await apiFetch(ENDPOINTS.ADMIN.WORK_REQUESTS);
+    isLoading = false;
     allRequests = Array.isArray(res?.data) ? res.data : [];
 
     if (!allRequests.length) {
-      container.innerHTML = "<p>No work requests found.</p>";
+      container.innerHTML = "";
+      container.appendChild(emptyState('admin-request'));
       return;
     }
 
     renderRequests();
 
   } catch (err) {
+    isLoading = false;
     container.innerHTML = `<p style="color:var(--error)">${err.message || "Failed to load requests"}</p>`;
   }
 }
@@ -53,9 +60,7 @@ function renderRequests() {
 
   list.forEach(r => {
     const card = document.createElement("div");
-    card.className = "card";
-    card.style.padding = "12px";
-    card.style.marginBottom = "12px";
+    card.className = "card p-md mb-md";
 
     card.innerHTML = `
       <h4>${r.category} - <span class="status">${r.status}</span></h4>
@@ -63,7 +68,7 @@ function renderRequests() {
       <p><b>Description:</b> ${r.description}</p>
       <p><b>Location:</b> ${r.location || "N/A"}</p>
       <p><b>Assigned Worker ID:</b> ${r.assigned_worker_id || "Not assigned"}</p>
-      <p style="font-size:13px;color:var(--muted)">⏱ ${new Date(r.created_at).toLocaleString()}</p>
+      <p class="text-muted" style="font-size:13px">⏱ ${new Date(r.created_at).toLocaleString()}</p>
     `;
 
     container.appendChild(card);

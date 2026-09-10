@@ -2,7 +2,7 @@ import { ENDPOINTS } from '../../config/api.js';
 import { CATEGORIES } from '../../config/categories.js';
 import { apiFetch } from '../../utils/api-client.js';
 import { toast } from '../../utils/toast.js';
-import { isEmail, isRequired, minLength } from '../../utils/validation.js';
+import { bindValidation, validateForm, clearFormErrors } from '../../utils/validation.js';
 
 const form = document.getElementById('registerWorkerForm');
 const geoBtn = document.getElementById('geoBtn');
@@ -19,18 +19,7 @@ CATEGORIES.forEach(cat => {
   skillSelect.appendChild(opt);
 });
 
-function showError(input, text) {
-  const el = input.parentElement.querySelector('.form-error');
-  if (el) { el.style.display = 'block'; el.textContent = text; }
-  input.classList.add('error');
-}
-
-function clearErrors(form) {
-  form.querySelectorAll('.form-error').forEach(e => {
-    e.style.display = 'none'; e.textContent = '';
-  });
-  form.querySelectorAll('.form-control').forEach(i => i.classList.remove('error'));
-}
+bindValidation(form);
 
 // GPS
 geoBtn.addEventListener('click', () => {
@@ -59,9 +48,11 @@ geoBtn.addEventListener('click', () => {
 // Form submit
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  clearErrors(form);
+  clearFormErrors(form);
   msg.textContent = '';
   resendBtn.style.display = 'none';
+
+  if (!validateForm(form)) return;
 
   const name = form.name.value.trim();
   const email = form.email.value.trim();
@@ -70,11 +61,6 @@ form.addEventListener('submit', async (e) => {
   const location = form.location.value.trim();
   const latitude = form.latitude.value.trim() || null;
   const longitude = form.longitude.value.trim() || null;
-
-  if (!isRequired(name)) return showError(form.name, 'Name is required');
-  if (!isEmail(email)) return showError(form.email, 'Invalid email');
-  if (!minLength(password, 6)) return showError(form.password, 'Password must be at least 6 chars');
-  if (!isRequired(skill_category)) return showError(form.skill_category, 'Skill category required');
 
   try {
     const payload = { name, email, password, skill_category, location, latitude, longitude };

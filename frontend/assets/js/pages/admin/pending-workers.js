@@ -1,4 +1,5 @@
 // frontend/assets/js/pages/admin/pending-workers.js
+import { skeletonCard, emptyState } from "../../components/skeletonCard.js";
 import { apiFetch } from "../../utils/api-client.js";
 import { ENDPOINTS } from "../../config/api.js";
 import { requireAuth } from "../../utils/auth.js";
@@ -9,27 +10,27 @@ requireAuth("admin");
 const container = document.getElementById("pendingWorkers");
 
 async function loadPending() {
-  container.innerHTML = "<p>Loading...</p>";
+  container.innerHTML = "";
+  container.appendChild(skeletonCard('pending-worker', 5));
 
   try {
     const res = await apiFetch(ENDPOINTS.ADMIN.PENDING_WORKERS);
     const workers = Array.isArray(res?.data) ? res.data : [];
 
     if (!workers.length) {
-      container.innerHTML = "<p>No pending workers.</p>";
+      container.innerHTML = "";
+      container.appendChild(emptyState('pending-worker'));
       return;
     }
 
     container.innerHTML = "";
     workers.forEach(worker => {
       const card = document.createElement("div");
-      card.className = "card";
-      card.style.padding = "10px";
-      card.style.marginBottom = "10px";
+      card.className = "card p-sm mb-sm";
       card.innerHTML = `
         <p><b>${worker.name}</b> (${worker.skill_category}) - ${worker.location || 'N/A'}</p>
 
-        <div style="display:flex; gap:10px; margin-top:8px;">
+        <div class="flex-row gap-10 mt-sm">
           <button class="btn btn-primary approve-btn" data-id="${worker.id}">Approve</button>
           <button class="btn btn-danger reject-btn" data-id="${worker.id}">Reject</button>
         </div>

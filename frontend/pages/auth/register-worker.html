@@ -4,20 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Register - FixMate (Worker)</title>
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="padding: 3rem 1rem; max-width: 900px">
+    <main class="container p-lg" style="max-width: 900px">
       <div class="card" style="margin: 0 auto; padding: 1.5rem">
-        <div
-          style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px"
-        >
+        <div class="flex-row mb-sm">
           <div style="font-size: 26px">🧰</div>
           <div>
             <h2 style="margin: 0">Join as a worker</h2>
-            <div style="color: var(--muted); font-size: 13px">
+            <div class="text-muted" style="font-size: 13px">
               Create your worker account. You'll need email verification & admin
               approval.
             </div>
@@ -28,19 +27,19 @@
           <div class="form-group">
             <label class="form-label">Full name</label>
             <input name="name" class="form-control" required />
-            <div class="form-error" style="display: none"></div>
+            <div class="form-error"></div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Email</label>
             <input name="email" type="email" class="form-control" required />
-            <div class="form-error" style="display: none"></div>
+            <div class="form-error"></div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Password</label>
             <input name="password" type="password" class="form-control" required />
-            <div class="form-error" style="display: none"></div>
+            <div class="form-error"></div>
           </div>
 
           <!-- UPDATED: Dropdown skill category -->
@@ -54,7 +53,7 @@
             >
               <option value="">Select your skill</option>
             </select>
-            <div class="form-error" style="display: none"></div>
+            <div class="form-error"></div>
           </div>
 
           <div class="form-group">
@@ -62,10 +61,8 @@
             <input name="location" class="form-control" placeholder="City / Area" />
           </div>
 
-          <div
-            style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px"
-          >
-            <div style="flex: 1">
+          <div class="flex-row gap-10 mb-md" style="align-items: flex-start">
+            <div class="flex-1">
               <label class="form-label">Latitude</label>
               <input
                 name="latitude"
@@ -73,7 +70,7 @@
                 placeholder="e.g. 23.7806"
               />
             </div>
-            <div style="flex: 1">
+            <div class="flex-1">
               <label class="form-label">Longitude</label>
               <input
                 name="longitude"
@@ -86,16 +83,14 @@
                 id="geoBtn"
                 type="button"
                 class="btn btn-secondary"
-                style="height: 40px; margin-top: 22px"
+                style="margin-top: 22px"
               >
                 Use GPS
               </button>
             </div>
           </div>
 
-          <div
-            style="display: flex; justify-content: space-between; align-items: center; gap: 8px"
-          >
+          <div class="flex-row justify-between gap-sm">
             <a href="/pages/auth/login.html" class="btn btn-secondary">
               Back to login
             </a>
@@ -105,13 +100,13 @@
           </div>
         </form>
 
-        <div id="registerWorkerMessage" style="margin-top: 12px"></div>
+        <div id="registerWorkerMessage" class="mt-md"></div>
 
         <!-- Incoming: Resend button -->
         <button
           id="resendVerifyBtn"
-          class="btn btn-secondary"
-          style="margin-top: 10px; display: none"
+          class="btn btn-secondary mt-sm"
+          style="display: none"
         >
           Resend verification email
         </button>
@@ -123,5 +118,10 @@
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();
     </script>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>

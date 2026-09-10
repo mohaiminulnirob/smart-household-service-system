@@ -1,4 +1,5 @@
 import { createWorkerRequestCard } from "../../components/workerRequestCard.js";
+import { skeletonCard, emptyState } from "../../components/skeletonCard.js";
 import { ENDPOINTS } from "../../config/api.js";
 import { apiFetch } from "../../utils/api-client.js";
 import { currentUser, requireAuth } from "../../utils/auth.js";
@@ -13,53 +14,34 @@ const workerId = worker.id;
 
 const container = document.getElementById("recentRequests");
 
+let isLoading = true;
+
 /* -------------------- LOAD RECENT REQUESTS -------------------- */
 async function loadRecent() {
+  isLoading = true;
+  container.innerHTML = "";
+  container.appendChild(skeletonCard('request', 3));
+
   try {
     const res = await apiFetch(ENDPOINTS.REQUESTS.WORKER_REQUESTS(workerId));
 
+    isLoading = false;
+    container.innerHTML = "";
+
     if (!Array.isArray(res) || res.length === 0) {
-      container.innerHTML = "<p>No assigned work.</p>";
+      container.appendChild(emptyState('request', 'No assigned work yet. Wait for a user to request your service.'));
       return;
     }
 
-    container.innerHTML = "";
     res.slice(0, 3).forEach((req) => {
       container.appendChild(createWorkerRequestCard(req));
     });
   } catch (err) {
+    isLoading = false;
     container.innerHTML = `<p style="color:red">Error: ${err.message}</p>`;
   }
 }
 
 loadRecent();
 
-/* -------------------- AVAILABILITY FORM -------------------- */
 
-const openBtn = document.getElementById("openAvailabilityForm");
-const formBox = document.getElementById("availabilityForm");
-const submitBtn = document.getElementById("submitAvailability");
-
-// Show/Hide form
-openBtn.onclick = () => {
-  formBox.style.display = formBox.style.display === "none" ? "block" : "none";
-};
-
-// Update availability
-submitBtn.onclick = async () => {
-  const selected = document.querySelector("input[name='availability']:checked");
-
-  if (!selected) return toast.error("Please select an availability option!");
-
-  try {
-    await apiFetch(ENDPOINTS.WORKERS.UPDATE_STATUS(workerId), {
-      method: "PUT",
-      body: { availability: selected.value },
-    });
-
-    toast.success("Availability updated!");
-    formBox.style.display = "none";
-  } catch (err) {
-    toast.error(err.message);
-  }
-};

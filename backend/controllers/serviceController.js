@@ -13,7 +13,6 @@ export const createRequest = async (req, res) => {
       latitude,
       longitude,
       selected_worker_id,
-      problem_pic    // base64 string (optional)
     } = req.body;
 
     if (!category || !description || !location || !latitude || !longitude)
@@ -22,24 +21,11 @@ export const createRequest = async (req, res) => {
     let assignedWorkerId = null;
     let status = "Pending";
 
-    // ------------------------------------------------------
-    // 📌 1) Convert Base64 → Buffer (if exists)
-    // ------------------------------------------------------
-    let problemPicBuffer = null;
-
-    if (problem_pic) {
-      try {
-        // Remove metadata prefix "data:image/jpeg;base64,"
-        const base64Data = problem_pic.split(',')[1] || problem_pic;
-        problemPicBuffer = Buffer.from(base64Data, "base64");
-      } catch (e) {
-        console.error("Base64 decode error:", e);
-        return res.status(400).json(error("Invalid image format"));
-      }
-    }
+    let problemPicUrl = null;
+    if (req.file) problemPicUrl = req.file.path;
 
     // ------------------------------------------------------
-    // 📌 2) Worker selected manually
+    // 📌 1) Worker selected manually
     // ------------------------------------------------------
     if (selected_worker_id) {
       const [workerRows] = await query(
@@ -69,7 +55,7 @@ export const createRequest = async (req, res) => {
     } 
     else {
       // ------------------------------------------------------
-      // 📌 3) Auto-assign nearest worker
+      // 📌 2) Auto-assign nearest worker
       // ------------------------------------------------------
       const [workers] = await query(
         `SELECT id, latitude, longitude,
@@ -93,7 +79,7 @@ export const createRequest = async (req, res) => {
     }
 
     // ------------------------------------------------------
-    // 📌 4) INSERT Request with image buffer (LONGBLOB)
+    // 📌 3) INSERT Request with Cloudinary URL
     // ------------------------------------------------------
     const [result] = await query(
       `INSERT INTO service_requests 
@@ -108,7 +94,7 @@ export const createRequest = async (req, res) => {
         longitude,
         status,
         assignedWorkerId,
-        problemPicBuffer
+        problemPicUrl
       ]
     );
 
@@ -263,14 +249,7 @@ export const getUserRequests = async (req, res) => {
       [id]
     );
 
-    // Convert BLOB → Base64 for frontend
-    const formatted = rows.map(r => {
-      if (r.problem_pic)
-        r.problem_pic = `data:image/jpeg;base64,${r.problem_pic.toString("base64")}`;
-      return r;
-    });
-
-    res.json(formatted);
+    res.json(rows);
 
   } catch (err) {
     console.error("getUserRequests error:", err);

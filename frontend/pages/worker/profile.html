@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Worker Profile - FixMate</title>
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
@@ -10,21 +11,15 @@
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="max-width: 500px; padding: 2rem">
+    <main class="container p-lg" style="max-width: 500px">
       <h2>My Profile</h2>
 
-      <div style="text-align: center; margin-bottom: 20px">
+      <div class="text-center mb-lg">
         <img
           id="profileImg"
           src="/assets/img/default-avatar.png"
-          style="
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-            cursor: pointer;
-          "
+          class="profile-avatar"
+          style="cursor: pointer"
         />
       </div>
 
@@ -35,7 +30,7 @@
       </div>
       <!-- ============================================ -->
 
-      <div class="card" style="padding: 20px">
+      <div class="card p-lg">
         <p><b>Name:</b> <span id="name"></span></p>
         <p><b>Email:</b> <span id="email"></span></p>
         <p><b>Phone:</b> <span id="phone"></span></p>
@@ -44,8 +39,7 @@
 
       <button
         id="updateBtn"
-        class="btn btn-primary"
-        style="margin-top: 20px; width: 100%"
+        class="btn btn-primary mt-lg w-100"
       >
         Update Profile
       </button>
@@ -56,5 +50,10 @@
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();
     </script>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>

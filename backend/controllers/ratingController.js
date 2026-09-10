@@ -67,9 +67,15 @@ export const getWorkerRatings = async (req, res) => {
       [id]
     );
 
-    // Get worker summary
+    // Get worker summary with computed aggregate from actual ratings
     const [worker] = await query(
-      "SELECT name, rating, rating_count FROM workers WHERE id = ?",
+      `SELECT w.name,
+              COALESCE(ROUND(AVG(r.score), 1), 0) AS rating,
+              COUNT(r.id) AS rating_count
+       FROM workers w
+       LEFT JOIN ratings r ON r.ratee_id = w.id
+       WHERE w.id = ?
+       GROUP BY w.id`,
       [id]
     );
 

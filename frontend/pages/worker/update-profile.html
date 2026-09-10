@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Update Worker Profile - FixMate</title>
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
@@ -10,25 +11,35 @@
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="max-width: 500px; padding: 2rem">
+    <main class="container p-lg" style="max-width: 500px">
       <h2>Update Profile</h2>
 
       <form id="updateForm">
-        <label>Name</label>
-        <input type="text" id="name" class="form-control" required />
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" id="name" class="form-control" required />
+          <div class="form-error"></div>
+        </div>
 
-        <label>Phone</label>
-        <input type="text" id="phone" class="form-control" />
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="text" id="phone" class="form-control" />
+        </div>
 
-        <label>Skill Category</label>
-        <select id="skill_category" class="form-control" required>
-          <option value="">Select Category</option>
-        </select>
+        <div class="form-group">
+          <label class="form-label">Skill Category</label>
+          <select id="skill_category" class="form-control" required>
+            <option value="">Select Category</option>
+          </select>
+          <div class="form-error"></div>
+        </div>
 
-        <label>Profile Picture</label>
-        <input type="file" id="profilePic" class="form-control" />
+        <div class="form-group">
+          <label class="form-label">Profile Picture</label>
+          <input type="file" id="profilePic" class="form-control" />
+        </div>
 
-        <button id="saveBtn" class="btn btn-primary" style="margin-top: 15px">
+        <button id="saveBtn" class="btn btn-primary mt-md">
           Save Changes
         </button>
       </form>
@@ -42,5 +53,10 @@
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();
     </script>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>

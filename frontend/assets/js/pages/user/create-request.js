@@ -4,6 +4,7 @@ import { CATEGORIES } from "../../config/categories.js";
 import { apiFetch } from "../../utils/api-client.js";
 import { getUser } from "../../utils/storage.js";
 import { toast } from "../../utils/toast.js";
+import { bindValidation, validateForm, clearFormErrors } from "../../utils/validation.js";
 
 // DOM
 const form = document.getElementById("requestForm");
@@ -22,7 +23,9 @@ const locationInput = document.getElementById("locationInput");
 // Image upload
 const fileInput = document.getElementById("imageInput");
 const previewImg = document.getElementById("previewImg");
-let base64Image = null;
+
+// Wire blur validation
+bindValidation(form);
 
 // Require login
 const user = getUser();
@@ -36,18 +39,12 @@ CATEGORIES.forEach(cat => {
   categorySelect.appendChild(opt);
 });
 
-// File → Base64
+// File preview
 fileInput.addEventListener("change", () => {
   const file = fileInput.files[0];
   if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    base64Image = reader.result;   // FULL base64 string
-    previewImg.src = base64Image;
-    previewImg.style.display = "block";
-  };
-  reader.readAsDataURL(file);
+  previewImg.src = URL.createObjectURL(file);
+  previewImg.classList.add("show");
 });
 
 // Clear selection
@@ -138,22 +135,22 @@ findNearbyBtn.addEventListener("click", async () => {
 form.addEventListener("submit", async e => {
   e.preventDefault();
 
-  const payload = {
-    category: categorySelect.value,
-    description: form.description.value.trim(),
-    location: locationInput.value.trim(),
-    latitude: latitudeInput.value.trim(),
-    longitude: longitudeInput.value.trim(),
-    problem_pic: base64Image || null  // include base64 string
-  };
+  clearFormErrors(form);
+  if (!validateForm(form)) return;
 
-  if (selectedWorkerInput.value)
-    payload.selected_worker_id = selectedWorkerInput.value;
+  const fd = new FormData();
+  fd.append("category", categorySelect.value);
+  fd.append("description", form.description.value.trim());
+  fd.append("location", locationInput.value.trim());
+  fd.append("latitude", latitudeInput.value.trim());
+  fd.append("longitude", longitudeInput.value.trim());
+  if (fileInput.files[0]) fd.append("problem_pic", fileInput.files[0]);
+  if (selectedWorkerInput.value) fd.append("selected_worker_id", selectedWorkerInput.value);
 
   try {
     await apiFetch(ENDPOINTS.REQUESTS.CREATE, {
       method: "POST",
-      body: payload
+      body: fd
     });
 
     toast.success("Request created successfully");

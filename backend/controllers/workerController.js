@@ -27,7 +27,7 @@ export const getWorkerRequests = async (req, res) => {
     const { id } = req.params;
 
     const [requests] = await query(
-      `SELECT sr.*, u.name AS user_name, u.email AS user_email
+      `SELECT sr.*, u.name AS user_name, u.email AS user_email, u.phone AS user_phone
        FROM service_requests sr
        JOIN users u ON sr.user_id = u.id
        WHERE sr.assigned_worker_id = ?
@@ -125,10 +125,6 @@ export const getWorkerProfile = async (req, res) => {
 
     const worker = rows[0];
 
-    // Convert BLOB → Base64
-    if (worker.profilePic)
-      worker.profilePic = `data:image/jpeg;base64,${worker.profilePic.toString("base64")}`;
-
     return res.json({ data: worker });
 
   } catch (err) {
@@ -142,18 +138,16 @@ export const getWorkerProfile = async (req, res) => {
 export const updateWorkerProfile = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, skill_category } = req.body;
-
-    let profilePic = null;
-    if (req.file) profilePic = req.file.buffer;
+    const { name, email, phone, skill_category } = req.body;
 
     const updates = [];
     const values = [];
 
     if (name) { updates.push("name=?"); values.push(name); }
     if (email) { updates.push("email=?"); values.push(email); }
+    if (phone) { updates.push("phone=?"); values.push(phone); }
     if (skill_category) { updates.push("skill_category=?"); values.push(skill_category); }
-    if (profilePic) { updates.push("profilePic=?"); values.push(profilePic); }
+    if (req.file) { updates.push("profilePic=?"); values.push(req.file.path); }
 
     if (!updates.length)
       return res.status(400).json(error("Nothing to update"));

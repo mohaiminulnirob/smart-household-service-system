@@ -14,12 +14,13 @@ export async function apiFetch(endpoint, options = {}) {
   const timeout = options.timeout || 10000; // 10s
   const id = setTimeout(() => controller.abort(), timeout);
 
-  const headers = Object.assign(
-    { 'Content-Type': 'application/json' },
-    options.headers || {}
-  );
+  const headers = options.headers || {};
 
   if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  if (!(options.body instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+  }
 
   const opts = Object.assign(
     {
@@ -30,7 +31,7 @@ export async function apiFetch(endpoint, options = {}) {
     options
   );
 
-  if (opts.body && typeof opts.body !== 'string') {
+  if (opts.body && typeof opts.body !== 'string' && !(opts.body instanceof FormData)) {
     opts.body = JSON.stringify(opts.body);
   }
 

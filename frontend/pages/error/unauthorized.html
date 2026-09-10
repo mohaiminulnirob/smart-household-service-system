@@ -2,13 +2,19 @@
 <html>
   <head>
     <title>Unauthorized</title>
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
     <link rel="stylesheet" href="../../assets/css/global.css" />
   </head>
   <body class="d-flex justify-center align-center" style="min-height: 100vh">
-    <div class="card text-center">
+    <div class="card text-center p-lg">
       <h1>🚫 Unauthorized</h1>
       <p>You don't have permission to view this page.</p>
       <a href="/index.html" class="btn btn-primary">Return Home</a>
     </div>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>

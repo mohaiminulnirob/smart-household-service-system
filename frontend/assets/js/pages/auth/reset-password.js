@@ -1,6 +1,7 @@
 import { apiFetch } from '../../utils/api-client.js';
 import { ENDPOINTS } from '../../config/api.js';
 import { toast } from '../../utils/toast.js';
+import { bindValidation, validateForm, clearFormErrors } from '../../utils/validation.js';
 
 // get ?token=xyz
 const urlParams = new URLSearchParams(window.location.search);
@@ -10,11 +11,16 @@ if (!token) {
   toast.error("Invalid reset link");
 }
 
-document.getElementById("resetForm").addEventListener("submit", async (e) => {
+const form = document.getElementById("resetForm");
+bindValidation(form);
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  clearFormErrors(form);
+  if (!validateForm(form)) return;
+
   const newPassword = document.getElementById("newPassword").value.trim();
-  if (!newPassword) return toast.error("Password required");
 
   try {
     await apiFetch(ENDPOINTS.AUTH.RESET_PASSWORD, {

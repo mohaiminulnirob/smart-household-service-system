@@ -1,4 +1,5 @@
 import { createWorkerRequestCard } from "../../components/workerRequestCard.js";
+import { skeletonCard, emptyState } from "../../components/skeletonCard.js";
 import { ENDPOINTS } from "../../config/api.js";
 import { apiFetch } from "../../utils/api-client.js";
 import { requireAuth } from "../../utils/auth.js";
@@ -17,18 +18,23 @@ const sortSelect = document.getElementById("sortSelect");
 const filterSelect = document.getElementById("filterSelect");
 
 let allRequests = [];
+let isLoading = true;
 
 async function loadRequests() {
-  container.innerHTML = "<p>Loading...</p>";
+  isLoading = true;
+  container.innerHTML = "";
+  container.appendChild(skeletonCard('request', 5));
 
   try {
     const res = await apiFetch(ENDPOINTS.REQUESTS.WORKER_REQUESTS(workerId));
 
+    isLoading = false;
     allRequests = Array.isArray(res) ? res : [];
 
     renderRequests();
 
   } catch (err) {
+    isLoading = false;
     container.innerHTML = `<p style="color:red">${err.message}</p>`;
   }
 }
@@ -51,7 +57,9 @@ function renderRequests() {
   });
 
   if (list.length === 0) {
-    container.innerHTML = "<p>No assigned requests.</p>";
+    if (isLoading) return;
+    container.innerHTML = "";
+    container.appendChild(emptyState('request', 'No assigned requests yet.'));
     return;
   }
 

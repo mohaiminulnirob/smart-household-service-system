@@ -1,42 +1,23 @@
 import { ENDPOINTS } from '../../config/api.js';
 import { apiFetch } from '../../utils/api-client.js';
 import { toast } from '../../utils/toast.js';
-import { isEmail, isRequired, minLength } from '../../utils/validation.js';
+import { bindValidation, validateForm, clearFormErrors } from '../../utils/validation.js';
 
 const form = document.getElementById('registerUserForm');
 const msg = document.getElementById('registerUserMessage');
 
-function showError(input, text) {
-  const el = input.parentElement.querySelector('.form-error');
-  if (el) { el.style.display = 'block'; el.textContent = text; }
-  input.classList.add('error');
-}
-function clearErrors(form) {
-  form.querySelectorAll('.form-error').forEach(e => { e.style.display = 'none'; e.textContent = ''; });
-  form.querySelectorAll('.form-control').forEach(i => i.classList.remove('error'));
-}
+bindValidation(form);
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  clearErrors(form);
+  clearFormErrors(form);
   msg.textContent = '';
+
+  if (!validateForm(form)) return;
 
   const name = form.name.value.trim();
   const email = form.email.value.trim();
   const password = form.password.value;
-
-  if (!isRequired(name)) {
-    showError(form.name, 'Name is required');
-    return;
-  }
-  if (!isEmail(email)) {
-    showError(form.email, 'Invalid email');
-    return;
-  }
-  if (!minLength(password, 6)) {
-    showError(form.password, 'Password must be at least 6 characters');
-    return;
-  }
 
   try {
     const res = await apiFetch(ENDPOINTS.AUTH.REGISTER_USER, {

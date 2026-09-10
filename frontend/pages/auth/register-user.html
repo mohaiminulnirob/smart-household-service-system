@@ -4,25 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Register - FixMate (User)</title>
+    <link rel="icon" type="image/png" href="/assets/images/fixmate-logo.png" />
     <link rel="stylesheet" href="/assets/css/global.css" />
   </head>
   <body>
     <div id="navbar-dynamic"></div>
 
-    <main class="container" style="padding: 3rem 1rem; max-width: 800px">
+    <main class="container p-lg" style="max-width: 800px">
       <div class="card" style="margin: 0 auto; padding: 1.75rem">
-        <div
-          style="
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 8px;
-          "
-        >
+        <div class="flex-row mb-sm">
           <div style="font-size: 26px">🔐</div>
           <div>
             <h2 style="margin: 0">Create your account</h2>
-            <div style="color: var(--muted); font-size: 13px">
+            <div class="text-muted" style="font-size: 13px">
               Register as a user to request services
             </div>
           </div>
@@ -32,13 +26,13 @@
           <div class="form-group">
             <label class="form-label">Full name</label>
             <input name="name" class="form-control" required />
-            <div class="form-error" style="display: none"></div>
+            <div class="form-error"></div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Email</label>
             <input name="email" type="email" class="form-control" required />
-            <div class="form-error" style="display: none"></div>
+            <div class="form-error"></div>
           </div>
 
           <div class="form-group">
@@ -49,17 +43,10 @@
               class="form-control"
               required
             />
-            <div class="form-error" style="display: none"></div>
+            <div class="form-error"></div>
           </div>
 
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              gap: 8px;
-            "
-          >
+          <div class="flex-row justify-between gap-sm">
             <a href="/pages/auth/login.html" class="btn btn-secondary"
               >Back to login</a
             >
@@ -69,7 +56,7 @@
           </div>
         </form>
 
-        <div id="registerUserMessage" style="margin-top: 12px"></div>
+        <div id="registerUserMessage" class="mt-md"></div>
       </div>
     </main>
 
@@ -78,5 +65,10 @@
       import { renderNavbarInto } from "/assets/js/components/navbar.js";
       renderNavbarInto();
     </script>
-  </body>
+  <div id="footer-dynamic"></div>
+<script type="module">
+  import { renderFooterInto } from "/assets/js/components/footer.js";
+  renderFooterInto();
+</script>
+</body>
 </html>
